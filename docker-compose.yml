@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:13.2-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+  app: &app
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      RAILS_ENV: ${RAILS_ENV}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}

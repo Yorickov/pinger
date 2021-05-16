@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+  app: &app
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+      args:
+        RAILS_ENV: test
