@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 10
+  host: <%= ENV.fetch('POSTGRES_HOST') { '127.0.0.1' } %>
+  username: <%= ENV.fetch('POSTGRES_USER') { 'postgres' } %>
+  password: <%= ENV.fetch('POSTGRES_PASSWORD') { 'postgres' } %>
+
+development:
+  <<: *default
+  database: hexlet_development
+
+test:
+  <<: *default
+  database: hexlet_test
+
+staging:
+  <<: *default
+  database: hexlet_staging
+
+production:
+  <<: *default
+  database: hexlet_production
