@@ -1,0 +1,22 @@
+doctype html
+html
+  / lang="#{I18n.locale}"
+  head
+    title Pinger
+
+    meta charset='UTF-8'
+    meta name='viewport' content='width=device-width, initial-scale=1'
+    meta http-equiv='X-UA-Compatible' content='ie=edge'
+
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body
+    div
+      = link_to 'Add site', new_site_path
+    div
+      = render 'shared/flash'
+    = yield
