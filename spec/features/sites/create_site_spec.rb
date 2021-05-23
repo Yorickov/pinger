@@ -2,9 +2,11 @@
 
 require 'rails_helper'
 
+# TODO: localize all spec
 feature 'Guest can add site for monitoring' do
-  given(:valid_name) { attributes_for(:site)[:name] }
-  given(:invalid_name) { attributes_for(:site, :invalid)[:name] }
+  given(:name) { attributes_for(:site)[:name] }
+  given(:valid_url) { attributes_for(:site)[:url] }
+  given(:invalid_url) { attributes_for(:site, :invalid)[:url] }
 
   background do
     visit root_path
@@ -13,7 +15,8 @@ feature 'Guest can add site for monitoring' do
 
   describe 'Guest adds site' do
     scenario 'successfully' do
-      fill_in 'Site name', with: valid_name
+      fill_in 'Name', with: name
+      fill_in 'Url', with: valid_url
       click_on 'Create'
 
       expect(page).to have_content 'Site created'
@@ -21,17 +24,19 @@ feature 'Guest can add site for monitoring' do
   end
 
   describe 'Guest fails to add site' do
-    scenario 'if site name is not filled in' do
+    scenario 'when name and url are not filled in' do
       click_on 'Create'
 
       expect(page).to have_content "Name can't be blank"
+      expect(page).to have_content "Url can't be blank"
     end
 
-    scenario 'if site name is not valid' do
-      fill_in 'Site name', with: invalid_name
+    scenario 'when url is not valid' do
+      fill_in 'Name', with: name
+      fill_in 'Url', with: invalid_url
       click_on 'Create'
 
-      expect(page).to have_content 'Name is invalid'
+      expect(page).to have_content 'Url is invalid'
     end
   end
 end

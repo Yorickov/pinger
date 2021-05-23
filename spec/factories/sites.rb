@@ -2,10 +2,11 @@
 
 FactoryBot.define do
   factory :site do
-    name { Faker::Internet.url }
+    name { Faker::Internet.name }
+    url { Faker::Internet.url }
 
     trait :invalid do
-      name { Faker::Name.name }
+      url { Faker::Name.name }
     end
   end
 end
