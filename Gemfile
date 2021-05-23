@@ -16,7 +16,7 @@ group :development, :test do
   gem 'annotate', '~> 3.1.1'
   gem 'database_cleaner-active_record'
   gem 'dotenv-rails', '~> 2.7.6'
-  gem 'factory_bot'
+  gem 'factory_bot_rails'
   gem 'pry-rails'
   gem 'rspec-rails', '~> 5.0.0'
 end
@@ -25,6 +25,15 @@ group :development do
   gem 'listen', '~> 3.3'
   gem 'ordinare'
   gem 'rack-mini-profiler', '~> 2.0'
+  gem 'solargraph'
   gem 'spring'
   gem 'web-console', '>= 4.1.0'
+end
+
+gem 'slim-rails'
+
+group :test do
+  gem 'capybara'
+  gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
+  gem 'shoulda-matchers'
 end
