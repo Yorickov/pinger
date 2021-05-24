@@ -24,4 +24,4 @@ jobs:
         POPER_SUMMARY_CHARACTER_LIMIT_NUMBER: 90
       with:
         runners: >-
-          brakeman fasterer poper rails_best_practices rails_schema reek rubocop scss yamllint
+          brakeman fasterer poper rails_schema rubocop scss yamllint
