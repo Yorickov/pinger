@@ -3,5 +3,5 @@
 Rails.application.routes.draw do
   root to: 'landing#index'
 
-  resources :sites, only: %i[new create index]
+  resources :sites, except: %i[edit update destroy]
 end

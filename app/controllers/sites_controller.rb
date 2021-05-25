@@ -9,12 +9,16 @@ class SitesController < ApplicationController
     @site = Site.new
   end
 
+  def show
+    @site = Site.find(params[:id])
+  end
+
   def create
     @site = Site.new(site_params)
 
     if @site.save
       # TODO: localize
-      redirect_to root_path, notice: 'Site created'
+      redirect_to @site, notice: 'Site created'
     else
       render :new, status: :unprocessable_entity
     end

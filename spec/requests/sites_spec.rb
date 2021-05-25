@@ -3,19 +3,19 @@
 require 'rails_helper'
 
 RSpec.describe 'Sites', type: :request do
-  describe 'GET /new' do
-    it 'returns http success' do
-      get '/sites/new'
-
-      expect(response).to have_http_status(:success)
-    end
-  end
-
   describe 'GET /index' do
     before { create_list(:site, 2) }
 
     it 'returns http success' do
       get '/sites'
+
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe 'GET /new' do
+    it 'returns http success' do
+      get '/sites/new'
 
       expect(response).to have_http_status(:success)
     end
@@ -30,7 +30,7 @@ RSpec.describe 'Sites', type: :request do
         post '/sites', params: valid_params
 
         expect(response).to have_http_status(:found)
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to Site.first
       end
 
       it 'saves site in database' do
@@ -48,6 +48,16 @@ RSpec.describe 'Sites', type: :request do
       it 'not save site in database' do
         expect { post '/sites', params: invalid_params }.not_to change(Site, :count)
       end
+    end
+  end
+
+  describe 'GET /show/:id' do
+    let!(:site) { create(:site) }
+
+    it 'returns http success' do
+      get "/sites/#{site.id}"
+
+      expect(response).to have_http_status(:success)
     end
   end
 end
