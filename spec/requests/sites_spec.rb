@@ -11,6 +11,16 @@ RSpec.describe 'Sites', type: :request do
     end
   end
 
+  describe 'GET /index' do
+    before { create_list(:site, 2) }
+
+    it 'returns http success' do
+      get '/sites'
+
+      expect(response).to have_http_status(:success)
+    end
+  end
+
   describe 'POST /create' do
     let(:valid_params) { { site: attributes_for(:site) } }
     let(:invalid_params) { { site: attributes_for(:site, :invalid) } }
