@@ -21,9 +21,7 @@ feature 'Guest can update site for monitoring' do
       fill_in 'Url', with: new_valid_url
       click_on 'Update Site'
 
-      within '.site-info' do
-        [new_name, new_valid_url].each { |content| expect(page).to have_content(content) }
-      end
+      [new_name, new_valid_url].each { |content| expect(page).to have_content(content) }
     end
   end
 
