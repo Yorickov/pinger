@@ -17,7 +17,7 @@ feature 'Guest can add site for monitoring' do
     scenario 'created site info appears on site page' do
       fill_in 'Name', with: name
       fill_in 'Url', with: valid_url
-      click_on 'Create'
+      click_on 'Create Site'
 
       within '.site-info' do
         [name, valid_url].each { |content| expect(page).to have_content(content) }
@@ -27,7 +27,7 @@ feature 'Guest can add site for monitoring' do
 
   describe 'Guest fails to add site' do
     scenario 'when name and url are not filled in' do
-      click_on 'Create'
+      click_on 'Create Site'
 
       ["Name can't be blank", "Url can't be blank"].each { |content| expect(page).to have_content(content) }
     end
@@ -35,7 +35,7 @@ feature 'Guest can add site for monitoring' do
     scenario 'when url is not valid' do
       fill_in 'Name', with: name
       fill_in 'Url', with: invalid_url
-      click_on 'Create'
+      click_on 'Create Site'
 
       expect(page).to have_content 'Url is invalid'
     end

@@ -26,7 +26,7 @@ RSpec.describe 'Sites', type: :request do
     let(:invalid_params) { { site: attributes_for(:site, :invalid) } }
 
     context 'with valid params' do
-      it 'redirect to root' do
+      it 'redirect to :show' do
         post '/sites', params: valid_params
 
         expect(response).to have_http_status(:found)
@@ -58,6 +58,29 @@ RSpec.describe 'Sites', type: :request do
       get "/sites/#{site.id}"
 
       expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe 'POST /update' do
+    let!(:site) { create(:site) }
+    let(:valid_params) { { site: attributes_for(:site) } }
+    let(:invalid_params) { { site: attributes_for(:site, :invalid) } }
+
+    context 'with valid params' do
+      it 'redirect to :show' do
+        patch "/sites/#{site.id}", params: valid_params
+
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to Site.first
+      end
+    end
+
+    context 'with invalid params' do
+      it 'returns status 422' do
+        patch "/sites/#{site.id}", params: invalid_params
+
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
     end
   end
 end
