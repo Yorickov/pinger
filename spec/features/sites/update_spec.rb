@@ -17,9 +17,7 @@ feature 'Guest can update site for monitoring' do
 
   describe 'Guest try to update site' do
     scenario 'updated site info appears on site page' do
-      fill_in 'Name', with: new_name
-      fill_in 'Url', with: new_valid_url
-      click_on 'Update Site'
+      fill_in_site_form(new_name, new_valid_url, 'Update Site')
 
       [new_name, new_valid_url].each { |content| expect(page).to have_content(content) }
     end
@@ -27,17 +25,13 @@ feature 'Guest can update site for monitoring' do
 
   describe 'Guest fails to update site' do
     scenario 'when name and url are not filled in' do
-      fill_in 'Name', with: ''
-      fill_in 'Url', with: ''
-      click_on 'Update Site'
+      fill_in_site_form('', '', 'Update Site')
 
       ["Name can't be blank", "Url can't be blank"].each { |content| expect(page).to have_content(content) }
     end
 
     scenario 'when url is not valid' do
-      fill_in 'Name', with: new_name
-      fill_in 'Url', with: new_invalid_url
-      click_on 'Update Site'
+      fill_in_site_form(new_name, new_invalid_url, 'Update Site')
 
       expect(page).to have_content 'Url is invalid'
     end
