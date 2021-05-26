@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SitesController < ApplicationController
-  before_action :load_site, only: %i[show edit update]
+  before_action :load_site, only: %i[show edit update destroy]
 
   def index
     @sites = Site.all
@@ -33,6 +33,12 @@ class SitesController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @site.destroy
+
+    redirect_to sites_path
   end
 
   private

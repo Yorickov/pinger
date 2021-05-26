@@ -3,5 +3,5 @@
 Rails.application.routes.draw do
   root to: 'landing#index'
 
-  resources :sites, except: %i[destroy]
+  resources :sites
 end

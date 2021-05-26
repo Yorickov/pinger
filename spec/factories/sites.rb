@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :site do
-    name { Faker::Internet.name }
+    name { Faker::Name.name }
     url { Faker::Internet.url }
 
     trait :invalid do

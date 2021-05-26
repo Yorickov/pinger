@@ -29,7 +29,6 @@ RSpec.describe 'Sites', type: :request do
       it 'redirect to :show' do
         post '/sites', params: valid_params
 
-        expect(response).to have_http_status(:found)
         expect(response).to redirect_to Site.first
       end
 
@@ -70,7 +69,6 @@ RSpec.describe 'Sites', type: :request do
       it 'redirect to :show' do
         patch "/sites/#{site.id}", params: valid_params
 
-        expect(response).to have_http_status(:found)
         expect(response).to redirect_to Site.first
       end
     end
@@ -81,6 +79,20 @@ RSpec.describe 'Sites', type: :request do
 
         expect(response).to have_http_status(:unprocessable_entity)
       end
+    end
+  end
+
+  describe 'POST /destroy' do
+    let!(:site) { create(:site) }
+
+    it 'redirect to :index' do
+      delete "/sites/#{site.id}"
+
+      expect(response).to redirect_to sites_path
+    end
+
+    it 'delete site from database' do
+      expect { delete "/sites/#{site.id}" }.to change(Site, :count).from(1).to(0)
     end
   end
 end
