@@ -29,17 +29,17 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
+ru:
   app:
-    name: 'Pinger'
-    short_description: 'A simple service that checks your favorite sites periodically and alerts you when they go down.'
+    name: 'Пингер'
+    short_description: 'Простой сервис, который проверяет избранные сайты и сообщает, если они становятся недоступны.'
   form:
-    add_site: 'Add site form'
+    add_site: 'Форма добавления сайта'
   label:
-    add: 'Add'
-    add_site: 'Add site'
-    name: 'Name'
-    try_it: 'Try it out'
-    url: 'URL'
+    add: 'Добавить'
+    add_site: 'Добавить сайт'
+    name: 'Название'
+    try_it: 'Попробовать'
+    url: 'Адрес'
   message:
-    site_created: 'Site created'
+    site_created: 'Сайт создан'
