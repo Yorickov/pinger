@@ -1,20 +1,19 @@
 = form_with model: site, local: true do |f|
   div
-    / TODO: localize
-    = f.label :name, 'Name'
+    = f.label :name, t('label.name')
     = f.text_field :name
     - site.errors.full_messages_for(:name).each do |message|
       div
         = message
 
   div
-    / TODO: localize
-    = f.label :url, 'Url'
+    = f.label :url, t('label.url')
     = f.text_field :url
     - site.errors.full_messages_for(:url).each do |message|
       div
         = message
 
   div
+    = f.button t('label.add')
     / TODO: precise button name
-    = f.submit
+    / = f.submit
