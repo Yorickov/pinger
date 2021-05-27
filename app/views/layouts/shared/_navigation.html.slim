@@ -1,7 +1,7 @@
-nav
-  div
-    / TODO: localize
-    div
-      = link_to 'All sites', sites_path
-    div
-      = link_to 'Add site', new_site_path
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container-fluid
+    .navbar-nav
+      a.nav-link href=sites_path = t 'label.all_sites'
+      a.nav-link href=new_site_path = t 'label.add_site'
+      a.nav-link href='/en' En
+      a.nav-link href='/ru' Ru
