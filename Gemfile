@@ -29,6 +29,7 @@ group :development do
   gem 'solargraph'
   gem 'spring'
   gem 'web-console', '>= 4.1.0'
+  gem 'rubocop'
 end
 
 group :test do
