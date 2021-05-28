@@ -30,6 +30,16 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    errors:
+      models:
+        site:
+          attributes:
+            name:
+              blank: "Name can't be blank"
+            url:
+              blank: "URL can't be blank"
+              invalid: 'URL is invalid'
   app:
     name: 'Pinger'
     short_description: 'A simple service that checks your favorite sites periodically and alerts you when they go down.'

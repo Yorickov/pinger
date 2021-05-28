@@ -1,4 +1,14 @@
 ru:
+  activerecord:
+    errors:
+      models:
+        site:
+          attributes:
+            name:
+              blank: 'Название не может быть пустым'
+            url:
+              blank: 'Адрес не может быть пустым'
+              invalid: 'Некорректный адрес'
   app:
     name: 'Пингер'
     short_description: 'Простой сервис, который проверяет избранные сайты и сообщает, если они становятся недоступны.'
