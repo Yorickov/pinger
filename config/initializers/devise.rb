@@ -8,13 +8,17 @@
 #
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
+
+# rubocop:disable Metrics/BlockLength
 Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
+  # rubocop:disable Layout/LineLength
   # config.secret_key = 'c9f45fd8e81a77eeeb50fafb62f675e7ae33815d77ff74a0b3040940365e2d0a88b7d2c278cc8a76db9029ee2b3fac1971720de7e2f198bc7c878044dd80545d'
+  # rubocop:enable Layout/LineLength
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -126,7 +130,9 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
+  # rubocop:disable Layout/LineLength
   # config.pepper = 'b27aed4d67ca137ad297e7e9699e9c04134cb8616e2ab633ee0852d360c9a17284654ee73bee39eb4733d670cea8022d626fcf4b67805f567e7e2fd33c3a159e'
+  # rubocop:enable Layout/LineLength
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -309,3 +315,4 @@ Devise.setup do |config|
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
 end
+# rubocop:enable Metrics/BlockLength
