@@ -21,6 +21,7 @@ en:
     short_description: 'A simple service that checks your favorite sites periodically and alerts you when they go down.'
   form:
     add_site: 'Add site form'
+    edit_site: 'Edit site form'
   label:
     add_site: 'Add site'
     all_sites: 'All sites'
