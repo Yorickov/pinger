@@ -35,7 +35,10 @@ feature 'Guest can update site for monitoring' do
     scenario 'when url is not valid' do
       fill_in_site_form(new_name, new_invalid_url, I18n.t('helpers.submit.update'))
 
-      expect(page).to have_content "#{I18n.t('attributes.url')} #{I18n.t('activerecord.errors.models.site.attributes.url.invalid')}"
+      expect(page).to have_content(
+        [I18n.t('attributes.url'),
+         I18n.t('activerecord.errors.models.site.attributes.url.invalid')].join(' ')
+      )
     end
   end
 end

@@ -28,15 +28,17 @@ feature 'Guest can add site for monitoring' do
       click_on I18n.t('helpers.submit.create')
 
       [I18n.t('attributes.name'), I18n.t('attributes.url')].each do |attr|
-        expect(page).to have_content("#{attr} #{I18n.t('activerecord.errors.models.site.blank')}")
+        expect(page).to have_content([attr, I18n.t('activerecord.errors.models.site.blank')].join(' '))
       end
-
     end
 
     scenario 'when url is not valid' do
       fill_in_site_form(name, invalid_url, I18n.t('helpers.submit.create'))
 
-      expect(page).to have_content("#{I18n.t('attributes.url')} #{I18n.t('activerecord.errors.models.site.attributes.url.invalid')}")
+      expect(page).to have_content(
+        [I18n.t('attributes.url'),
+         I18n.t('activerecord.errors.models.site.attributes.url.invalid')].join(' ')
+      )
     end
   end
 end
