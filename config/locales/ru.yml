@@ -3,22 +3,27 @@ ru:
     errors:
       models:
         site:
+          blank: "не может быть пустым"
           attributes:
-            name:
-              blank: 'Название не может быть пустым'
             url:
-              blank: 'Адрес не может быть пустым'
-              invalid: 'Некорректный адрес'
+              invalid: 'задан некорректно'
+  models:
+    site: 'Сайт'
+  attributes:
+    url: 'Адрес'
+    name: 'Название'
+  helpers:
+    submit:
+      create: "Добавить"
+      update: "Сохранить изменения"
   app:
     name: 'Пингер'
     short_description: 'Простой сервис, который проверяет избранные сайты и сообщает, если они становятся недоступны.'
   form:
     add_site: 'Форма добавления сайта'
   label:
-    add: 'Добавить'
     add_site: 'Добавить сайт'
-    name: 'Название'
+    all_sites: 'Все сайты'
     try_it: 'Попробовать'
-    url: 'Адрес'
   message:
     site_created: 'Сайт создан'
