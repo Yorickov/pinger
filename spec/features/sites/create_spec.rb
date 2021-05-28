@@ -15,7 +15,7 @@ feature 'Guest can add site for monitoring' do
 
   describe 'Guest try to add site' do
     scenario 'created site info appears on site page' do
-      fill_in_site_form(name, valid_url, I18n.t('label.add'))
+      fill_in_site_form(name, valid_url, I18n.t('helpers.submit.create'))
 
       within '.site-info' do
         [name, valid_url].each { |content| expect(page).to have_content(content) }
@@ -25,17 +25,18 @@ feature 'Guest can add site for monitoring' do
 
   describe 'Guest fails to add site' do
     scenario 'when name and url are not filled in' do
-      click_on I18n.t('label.add')
+      click_on I18n.t('helpers.submit.create')
 
-      ['name.blank', 'url.blank'].each do |message|
-        expect(page).to have_content(I18n.t("activerecord.errors.models.site.attributes.#{message}"))
+      [I18n.t('attributes.name'), I18n.t('attributes.url')].each do |attr|
+        expect(page).to have_content("#{attr} #{I18n.t('activerecord.errors.models.site.blank')}")
       end
+
     end
 
     scenario 'when url is not valid' do
-      fill_in_site_form(name, invalid_url, I18n.t('label.add'))
+      fill_in_site_form(name, invalid_url, I18n.t('helpers.submit.create'))
 
-      expect(page).to have_content I18n.t('activerecord.errors.models.site.attributes.url.invalid')
+      expect(page).to have_content("#{I18n.t('attributes.url')} #{I18n.t('activerecord.errors.models.site.attributes.url.invalid')}")
     end
   end
 end

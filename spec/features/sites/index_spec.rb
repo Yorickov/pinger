@@ -8,8 +8,7 @@ feature 'Guest can see all sites added for monitoring' do
   background { visit root_path }
 
   scenario 'Guest try to see sites' do
-    # TODO: localize
-    click_on 'All sites'
+    click_on I18n.t('label.all_sites')
 
     within 'table' do
       sites.each do |site|
