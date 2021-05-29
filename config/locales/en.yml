@@ -14,8 +14,8 @@ en:
     name: 'Name'
   helpers:
     submit:
-      create: "Add"
-      update: "Save changes"
+      create: 'Add'
+      update: 'Save changes'
   app:
     name: 'Pinger'
     short_description: 'A simple service that checks your favorite sites periodically and alerts you when they go down.'
