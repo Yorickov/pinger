@@ -20,7 +20,7 @@ require 'sprockets/railtie'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-Dotenv::Railtie.load
+Dotenv::Railtie.loadDotenv::Railtie.load if %w[development test].include? ENV['RAILS_ENV']
 
 module HexletProject
   class Application < Rails::Application
