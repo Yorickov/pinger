@@ -12,7 +12,7 @@ RSpec.describe 'Users', type: :request do
       sign_in User.create(valid_user_params)
 
       get '/users/sign_up'
-      expect(response).to redirect_to('/')
+      expect(response).to have_http_status(:redirect)
     end
 
     it 'edit user page' do
@@ -28,7 +28,7 @@ RSpec.describe 'Users', type: :request do
       get '/users/sign_up'
       expect(response).to have_http_status(:success)
     end
-  
+
     it 'login page' do
       get '/users/sign_in'
       expect(response).to have_http_status(:success)
@@ -43,14 +43,14 @@ RSpec.describe 'Users', type: :request do
   context 'with valid params' do
     it 'create user' do
       post '/users', params: { user: valid_user_params }
-      expect(response).to redirect_to('/')
+      expect(response).to have_http_status(:redirect)
     end
 
     it 'login' do
       User.create(valid_user_params)
 
       post '/users/sign_in', params: { user: valid_user_params }
-      expect(response).to redirect_to('/')
+      expect(response).to have_http_status(:redirect)
       expect(user_signed_in?).to be_truthy
     end
 
@@ -58,7 +58,7 @@ RSpec.describe 'Users', type: :request do
       sign_in User.create(valid_user_params)
 
       delete '/users/sign_out'
-      expect(response).to redirect_to('/')
+      expect(response).to have_http_status(:redirect)
       expect(user_signed_in?).to be_falsey
     end
 
@@ -68,7 +68,7 @@ RSpec.describe 'Users', type: :request do
       updated_attributes[:current_password] = updated_attributes[:password]
 
       put '/users', params: { user: updated_attributes }
-      expect(response).to redirect_to('/')
+      expect(response).to have_http_status(:redirect)
     end
   end
 

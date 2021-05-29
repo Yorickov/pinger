@@ -2,7 +2,11 @@
 
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'landing#index'
 
-  resources :sites, only: %i[new create]
+  scope '(:locale)', locale: /en|ru/ do
+    resources :sites
+  end
+
+  get '/:locale' => 'landing#index'
+  root to: 'landing#index'
 end

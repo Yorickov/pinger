@@ -1,16 +1,18 @@
-nav
-  div
-    ul
-      / TODO: localize
-      li
-        = link_to 'Add site', new_site_path
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container-fluid
+    .navbar-nav
+      a.nav-link href=sites_path = t 'label.all_sites'
+      a.nav-link href=new_site_path = t 'label.add_site'
+      a.nav-link href='/en' En
+      a.nav-link href='/ru' Ru
+    ul.navbar-nav
       - if user_signed_in?
         li
-          = link_to 'Edit profile', edit_user_registration_path
+          = link_to 'Edit profile', edit_user_registration_path, class: 'nav-link'
         li
-          = link_to 'Log Out', destroy_user_session_path, method: :delete
+          = link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'nav-link'
       - else
         li
-          = link_to 'Sign Up', new_user_registration_path
+          = link_to 'Sign Up', new_user_registration_path, class: 'nav-link'
         li
-          = link_to 'LogIn', new_user_session_path
+          = link_to 'LogIn', new_user_session_path, class: 'nav-link'

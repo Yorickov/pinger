@@ -31,10 +31,12 @@ group :development do
   gem 'solargraph'
   gem 'spring'
   gem 'web-console', '>= 4.1.0'
+  gem 'rubocop'
 end
 
 group :test do
   gem 'capybara'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
+  gem 'launchy'
   gem 'shoulda-matchers'
 end

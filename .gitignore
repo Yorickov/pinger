@@ -76,4 +76,8 @@ Makefile
 yarn-debug.log*
 .yarn-integrity
 
+# Sublime project files
+*.sublime-project
+*.sublime-workspace
+
 *.sqlite3
