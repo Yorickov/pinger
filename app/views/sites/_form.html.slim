@@ -1,13 +1,13 @@
 = form_with model: site, local: true do |f|
   div
-    = f.label :name, t('attributes.name')
+    = f.label :name, t('activerecord.attributes.site.name')
     = f.text_field :name
     - site.errors.full_messages_for(:name).each do |message|
       div
         = message
 
   div
-    = f.label :url, t('attributes.url')
+    = f.label :url, t('activerecord.attributes.site.url')
     = f.text_field :url
     - site.errors.full_messages_for(:url).each do |message|
       div

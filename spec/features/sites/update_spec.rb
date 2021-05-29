@@ -17,7 +17,7 @@ feature 'Guest can update site for monitoring' do
 
   describe 'Guest try to update site' do
     scenario 'updated site info appears on site page' do
-      fill_in_site_form(new_name, new_valid_url, I18n.t('helpers.submit.update'))
+      fill_in_site_form(new_name, new_valid_url, t('helpers.submit.update'))
 
       [new_name, new_valid_url].each { |content| expect(page).to have_content(content) }
     end
@@ -25,19 +25,18 @@ feature 'Guest can update site for monitoring' do
 
   describe 'Guest fails to update site' do
     scenario 'when name and url are not filled in' do
-      fill_in_site_form('', '', I18n.t('helpers.submit.update'))
+      fill_in_site_form('', '', t('helpers.submit.update'))
 
-      [I18n.t('attributes.name'), I18n.t('attributes.url')].each do |attr|
-        expect(page).to have_content("#{attr} #{I18n.t('activerecord.errors.models.site.blank')}")
+      [t('activerecord.attributes.site.name'), t('activerecord.attributes.site.url')].each do |attr|
+        expect(page).to have_content("#{attr} #{t('activerecord.errors.messages.blank')}")
       end
     end
 
     scenario 'when url is not valid' do
-      fill_in_site_form(new_name, new_invalid_url, I18n.t('helpers.submit.update'))
+      fill_in_site_form(new_name, new_invalid_url, t('helpers.submit.update'))
 
       expect(page).to have_content(
-        [I18n.t('attributes.url'),
-         I18n.t('activerecord.errors.models.site.attributes.url.invalid')].join(' ')
+        [t('activerecord.attributes.site.url'), t('activerecord.errors.messages.invalid')].join(' ')
       )
     end
   end
