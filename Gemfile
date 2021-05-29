@@ -26,10 +26,10 @@ group :development do
   gem 'listen', '~> 3.3'
   gem 'ordinare'
   gem 'rack-mini-profiler', '~> 2.0'
+  gem 'rubocop'
   gem 'solargraph'
   gem 'spring'
   gem 'web-console', '>= 4.1.0'
-  gem 'rubocop'
 end
 
 group :test do
