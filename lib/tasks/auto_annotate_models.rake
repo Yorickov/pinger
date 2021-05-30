@@ -11,7 +11,7 @@ if Rails.env.development?
   end
 
   # rubocop:disable Metrics/BlockLength
-  task :set_annotation_options do
+  task set_annotation_options: :environment do
     # You can override any of these by setting an environment variable of the
     # same name.
     Annotate.set_defaults(
