@@ -9,21 +9,34 @@ en:
 
   helpers:
     submit:
-      create: 'Add'
+      create: 'Add site'
       update: 'Save changes'
+
+  links:
+    edit: Edit
+    delete: Delete
+    confirm: Are you shure?
 
   app:
     name: 'Pinger'
     short_description: 'A simple service that checks your favorite sites periodically and alerts you when they go down.'
 
   form:
-    add_site: 'Add site form'
-    edit_site: 'Edit site form'
+    add_site: 'Add site for monitoring'
+    edit_site: 'Edit site'
 
   label:
-    add_site: 'Add site'
+    add_site: 'Add new site'
     all_sites: 'All sites'
     try_it: 'Try it out'
 
   message:
     site_created: 'Site created'
+
+  sites:
+    index:
+      name: Site name
+      url: Site URL
+      edit: Edit
+      delete: Delete
+      settings: Settings

@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 
-# TODO: localize all spec
 feature 'Guest can delete site' do
   given!(:site) { create(:site) }
 
@@ -11,7 +10,7 @@ feature 'Guest can delete site' do
   scenario 'deleted site absents on sites page' do
     [site.name, site.url].each { |content| expect(page).to have_content(content) }
 
-    find('table>tbody>tr').click_on('Delete')
+    find('table>tbody>tr').click_on t('links.delete')
 
     [site.name, site.url].each { |content| expect(page).not_to have_content(content) }
   end

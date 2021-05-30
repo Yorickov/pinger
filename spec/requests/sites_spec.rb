@@ -66,17 +66,29 @@ RSpec.describe 'Sites', type: :request do
     let(:invalid_params) { { site: attributes_for(:site, :invalid) } }
 
     context 'with valid params' do
-      it 'redirect to :show' do
-        patch "/sites/#{site.id}", params: valid_params
+      before { patch "/sites/#{site.id}", params: valid_params }
 
-        expect(response).to redirect_to Site.first
+      it 'changes site attributes' do
+        site.reload
+        expect(site.name).to eq valid_params[:site][:name]
+        expect(site.url).to eq valid_params[:site][:url]
+      end
+
+      it 'redirect to :show' do
+        expect(response).to redirect_to site
       end
     end
 
     context 'with invalid params' do
-      it 'returns status 422' do
-        patch "/sites/#{site.id}", params: invalid_params
+      before { patch "/sites/#{site.id}", params: invalid_params }
 
+      it 'does not change site attributes' do
+        site.reload
+        expect(site.name).not_to eq valid_params[:site][:name]
+        expect(site.url).not_to eq valid_params[:site][:url]
+      end
+
+      it 'returns status 422' do
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end

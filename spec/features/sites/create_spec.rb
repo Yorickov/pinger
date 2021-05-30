@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 
-# TODO: localize all spec
 feature 'Guest can add site for monitoring' do
   given(:name) { attributes_for(:site)[:name] }
   given(:valid_url) { attributes_for(:site)[:url] }

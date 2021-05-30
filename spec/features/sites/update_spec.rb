@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 
-# TODO: localize all spec
 feature 'Guest can update site for monitoring' do
   given!(:site) { create(:site) }
 
@@ -12,7 +11,7 @@ feature 'Guest can update site for monitoring' do
 
   background do
     visit sites_path
-    find('table>tbody>tr').click_on('Edit')
+    find('table>tbody>tr').click_on t('links.edit')
   end
 
   describe 'Guest try to update site' do
@@ -28,7 +27,7 @@ feature 'Guest can update site for monitoring' do
       fill_in_site_form('', '', t('helpers.submit.update'))
 
       [t('activerecord.attributes.site.name'), t('activerecord.attributes.site.url')].each do |attr|
-        expect(page).to have_content("#{attr} #{t('activerecord.errors.messages.blank')}")
+        expect(page).to have_content([attr, t('activerecord.errors.messages.blank')].join(' '))
       end
     end
 
