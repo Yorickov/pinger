@@ -32,6 +32,8 @@ ru:
 
   message:
     site_created: 'Сайт создан'
+    site_updated: 'Сайт изменен'
+    site_deleted: 'Сайт удален'
 
   sites:
     index:

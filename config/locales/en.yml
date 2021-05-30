@@ -32,6 +32,8 @@ en:
 
   message:
     site_created: 'Site created'
+    site_updated: 'Site updated'
+    site_deleted: 'Site deleted'
 
   sites:
     index:
