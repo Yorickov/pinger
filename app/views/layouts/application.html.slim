@@ -9,4 +9,7 @@ html lang="#{I18n.locale}"
 
     .container.my-4
       main
+        - if content_for?(:header)
+          h3.text-center = yield :header
+
         = yield
