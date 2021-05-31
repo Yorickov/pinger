@@ -5,6 +5,7 @@ module FlashRailsMessages
     # BOOTSTRAP FRAMEWORK
     # =========================================
 
+    # TODO: uncomment if necessary to change the element behavior
     # def alert_element(type, message)
     #   content_tag :div, alert_options(type) do
     #     content = ActiveSupport::SafeBuffer.new
@@ -16,11 +17,10 @@ module FlashRailsMessages
 
     def close_element
       tag.button type: 'button', class: 'btn-close', 'data-bs-dismiss': 'alert', 'aria-label': 'Close' do
-        # content_tag(:span, '&times;'.html_safe, 'aria-hidden': 'true') +
-        # content_tag(:span, 'Close', class: 'sr-only')
       end
     end
 
+    # TODO: uncomment if necessary to change default behavior
     # def default_alert_classes
     #   'alert'
     # end
