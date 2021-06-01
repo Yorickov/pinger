@@ -7,7 +7,9 @@ html lang="#{I18n.locale}"
     header
       = render 'layouts/shared/navigation'
 
-    = render 'layouts/shared/flash'
+    .container.my-4
+      main
+        - if content_for?(:header)
+          h3.text-center = yield :header
 
-    main
-      = yield
+        = yield

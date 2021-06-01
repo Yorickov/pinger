@@ -1,7 +1,8 @@
 tr
-  td= site.name
-  td= site.url
-  / TODO: localize
-  td= link_to 'Show', site
-  td= link_to 'Edit', edit_site_path(site)
-  td= link_to 'Delete', site, method: :delete, data: { confirm: 'Are you sure?' }
+  td.position-relative
+    = link_to site.name, site, class: 'stretched-link text-decoration-none'
+  td
+    = site.url
+  td
+    = link_to t('links.edit'), edit_site_path(site), class: 'btn btn-sm btn-primary me-3'
+    = link_to t('links.delete'), site, method: :delete, data: { confirm: t('links.confirm') }, class: 'btn btn-sm btn-danger'

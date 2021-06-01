@@ -1,17 +1,14 @@
 = form_with model: site, local: true do |f|
-  div
-    = f.label :name, t('attributes.name')
-    = f.text_field :name
+  .mb-3
+    = f.label :name, t('activerecord.attributes.site.name'), class: "form-label"
+    = f.text_field :name, class: "form-control"
     - site.errors.full_messages_for(:name).each do |message|
-      div
-        = message
+      .text-danger = message
 
-  div
-    = f.label :url, t('attributes.url')
-    = f.text_field :url
+  .mb-3
+    = f.label :url, t('activerecord.attributes.site.url'), class: "form-label"
+    = f.text_field :url, class: "form-control"
     - site.errors.full_messages_for(:url).each do |message|
-      div
-        = message
+      .text-danger = message
 
-  div
-    = f.submit
+  = f.submit class: 'btn btn-primary'

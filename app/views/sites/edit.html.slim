@@ -1,4 +1,4 @@
-section
-  h3 = t 'form.edit_site'
+- content_for :header do
+  = t('form.edit_site')
 
-  = render 'form', site: @site
+= render partial: 'form', locals: { site: @site }, layout: 'shared/site_form'

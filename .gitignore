@@ -21,7 +21,6 @@ public/packs
 # Config files
 config/database.yml
 config/cable.yml
-config/storage.yml
 config/master.key
 
 # Ignore Byebug command history file.

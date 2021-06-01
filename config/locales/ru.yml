@@ -1,30 +1,44 @@
 ru:
   activerecord:
-    errors:
-      models:
-        site:
-          blank: 'не может быть пустым'
-          attributes:
-            url:
-              invalid: 'задан некорректно'
-  models:
-    site: 'Сайт'
-  attributes:
-    url: 'Адрес'
-    name: 'Название'
+    models:
+      site: 'Site'
+    attributes:
+      site:
+        url: 'Адрес'
+        name: 'Название'
+
   helpers:
     submit:
-      create: 'Добавить'
+      create: 'Добавить сайт'
       update: 'Сохранить изменения'
+
+  links:
+    edit: Редактировать
+    delete: Удалить
+    confirm: Вы уверены?
+
   app:
     name: 'Пингер'
     short_description: 'Простой сервис, который проверяет избранные сайты и сообщает, если они становятся недоступны.'
+
   form:
-    add_site: 'Форма добавления сайта'
-    edit_site: 'Форма редактирования сайта'
+    add_site: 'Добавить сайт для мониторинга'
+    edit_site: 'Редактировать сайт'
+
   label:
-    add_site: 'Добавить сайт'
+    add_site: 'Добавить новый сайт'
     all_sites: 'Все сайты'
     try_it: 'Попробовать'
+
   message:
     site_created: 'Сайт создан'
+    site_updated: 'Сайт изменен'
+    site_deleted: 'Сайт удален'
+
+  sites:
+    index:
+      name: Название сайта
+      url: Адрес сайта
+      edit: Редактировать
+      delete: Удалить
+      settings: Настройки

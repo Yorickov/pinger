@@ -17,8 +17,7 @@ class SitesController < ApplicationController
     @site = Site.new(site_params)
 
     if @site.save
-      # TODO: localize
-      redirect_to @site, notice: 'Site created'
+      redirect_to @site, notice: t('message.site_created')
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,8 +27,7 @@ class SitesController < ApplicationController
 
   def update
     if @site.update(site_params)
-      # TODO: localize
-      redirect_to @site, notice: 'Site updated'
+      redirect_to @site, notice: t('message.site_updated')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -38,7 +36,7 @@ class SitesController < ApplicationController
   def destroy
     @site.destroy
 
-    redirect_to sites_path
+    redirect_to sites_path, notice: t('message.site_deleted')
   end
 
   private

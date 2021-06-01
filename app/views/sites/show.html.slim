@@ -1,3 +1,6 @@
-section.site-info
-  p= @site.name
-  p= @site.url
+.row
+  .col-lg-6.col-md-8.mx-auto
+    .card.site-info
+      .card-body
+        h5.card-title = @site.name
+        .card-text = @site.url

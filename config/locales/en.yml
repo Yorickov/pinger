@@ -1,30 +1,44 @@
 en:
   activerecord:
-    errors:
-      models:
-        site:
-          blank: "can't be blank"
-          attributes:
-            url:
-              invalid: 'is invalid'
-  models:
-    site: 'Site'
-  attributes:
-    url: 'URL'
-    name: 'Name'
+    models:
+      site: 'Site'
+    attributes:
+      site:
+        url: 'URL'
+        name: 'Name'
+
   helpers:
     submit:
-      create: 'Add'
+      create: 'Add site'
       update: 'Save changes'
+
+  links:
+    edit: Edit
+    delete: Delete
+    confirm: Are you shure?
+
   app:
     name: 'Pinger'
     short_description: 'A simple service that checks your favorite sites periodically and alerts you when they go down.'
+
   form:
-    add_site: 'Add site form'
-    edit_site: 'Edit site form'
+    add_site: 'Add site for monitoring'
+    edit_site: 'Edit site'
+
   label:
-    add_site: 'Add site'
+    add_site: 'Add new site'
     all_sites: 'All sites'
     try_it: 'Try it out'
+
   message:
     site_created: 'Site created'
+    site_updated: 'Site updated'
+    site_deleted: 'Site deleted'
+
+  sites:
+    index:
+      name: Site name
+      url: Site URL
+      edit: Edit
+      delete: Delete
+      settings: Settings

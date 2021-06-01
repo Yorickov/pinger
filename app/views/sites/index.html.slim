@@ -1,11 +1,8 @@
-table
+table.table.table-hover
   thead
     tr
-      / TODO: localize
-      th= 'Name'
-      th= 'Url'
-      th= 'Show'
-      th= 'Edit'
-      th= 'Delete'
+      th scope="col" = t('.name')
+      th scope="col" = t('.url')
+      th scope="col" = t('.settings')
   tbody
     = render @sites
