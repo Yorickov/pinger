@@ -7,7 +7,7 @@ if Rails.env.development?
   require 'annotate'
 
   task routes: :environment do
-    puts `bundle exec rails routes -g 'sites|landing'`
+    puts `bundle exec rails routes -g 'sites|landing|devise'`
   end
 
   # rubocop:disable Metrics/BlockLength

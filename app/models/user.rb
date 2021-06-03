@@ -23,4 +23,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  has_many :sites, dependent: :destroy
+
+  def own_site?(site)
+    id == site.user_id
+  end
 end

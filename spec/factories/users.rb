@@ -29,5 +29,15 @@ FactoryBot.define do
       password { 'short' }
       password_confirmation { 'short' }
     end
+
+    factory :user_with_sites do
+      transient do
+        sites_count { 1 }
+      end
+
+      after(:create) do |user, evaluator|
+        create_list(:site, evaluator.sites_count, user: user)
+      end
+    end
   end
 end

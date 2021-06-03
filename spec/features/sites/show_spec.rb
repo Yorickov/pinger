@@ -2,16 +2,22 @@
 
 require 'rails_helper'
 
-feature 'Guest can see info about selected site' do
-  given!(:sites) { create_list(:site, 2) }
+feature 'User can see info about any of his sites' do
+  given(:user) { create(:user_with_sites, sites_count: 2) }
+  given(:site) { user.sites.second }
 
-  background { visit sites_path }
+  describe 'Authenticated user' do
+    background do
+      sign_in(user)
+      visit sites_path
+    end
 
-  scenario 'Guest try show info about second site in list' do
-    find('table>tbody>tr:last-child').click_on sites.second.name
+    scenario 'can see info about second site' do
+      find('table>tbody>tr:last-child').click_on site.name
 
-    within '.site-info' do
-      [sites.second.name, sites.second.url].each { |content| expect(page).to have_content(content) }
+      within '.site-info' do
+        [site.name, site.url].each { |content| expect(page).to have_content(content) }
+      end
     end
   end
 end

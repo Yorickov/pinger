@@ -34,6 +34,7 @@ en:
     site_created: 'Site created'
     site_updated: 'Site updated'
     site_deleted: 'Site deleted'
+    no_authorized: You are not authorized
 
   sites:
     index:

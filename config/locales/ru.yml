@@ -34,6 +34,7 @@ ru:
     site_created: 'Сайт создан'
     site_updated: 'Сайт изменен'
     site_deleted: 'Сайт удален'
+    no_authorized: У Вас нет прав на совершения таких действий
 
   sites:
     index:

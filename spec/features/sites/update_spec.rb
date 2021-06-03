@@ -2,41 +2,65 @@
 
 require 'rails_helper'
 
-feature 'Guest can update site for monitoring' do
-  given!(:site) { create(:site) }
+feature 'User can update site added by him for monitoring' do
+  given(:user1) { create(:user_with_sites) }
+  given(:site) { user1.sites.first }
+  given(:user2) { create(:user) }
 
   given(:new_name) { attributes_for(:site)[:name] }
   given(:new_valid_url) { attributes_for(:site)[:url] }
   given(:new_invalid_url) { attributes_for(:site, :invalid)[:url] }
 
-  background do
-    visit sites_path
-    find('table>tbody>tr').click_on t('links.edit')
-  end
-
-  describe 'Guest try to update site' do
-    scenario 'updated site info appears on site page' do
-      fill_in_site_form(new_name, new_valid_url, t('helpers.submit.update'))
-
-      [new_name, new_valid_url].each { |content| expect(page).to have_content(content) }
-    end
-  end
-
-  describe 'Guest fails to update site' do
-    scenario 'when name and url are not filled in' do
-      fill_in_site_form('', '', t('helpers.submit.update'))
-
-      [t('activerecord.attributes.site.name'), t('activerecord.attributes.site.url')].each do |attr|
-        expect(page).to have_content([attr, t('activerecord.errors.messages.blank')].join(' '))
+  describe 'Authenticated authorized user' do
+    background do
+      sign_in(user1)
+      visit sites_path
+      within 'table' do
+        click_on t('links.edit')
       end
     end
 
-    scenario 'when url is not valid' do
-      fill_in_site_form(new_name, new_invalid_url, t('helpers.submit.update'))
+    scenario 'updates his site' do
+      fill_in t('activerecord.attributes.site.name'), with: new_name
+      fill_in t('activerecord.attributes.site.url'), with: new_valid_url
+      click_on t('helpers.submit.update')
 
-      expect(page).to have_content(
-        [t('activerecord.attributes.site.url'), t('activerecord.errors.messages.invalid')].join(' ')
-      )
+      [new_name, new_valid_url].each { |content| expect(page).to have_content(content) }
+    end
+
+    describe 'fails to update' do
+      scenario 'whithout name and url' do
+        fill_in t('activerecord.attributes.site.name'), with: ''
+        fill_in t('activerecord.attributes.site.url'), with: ''
+        click_on t('helpers.submit.update')
+
+        [t('activerecord.attributes.site.name'), t('activerecord.attributes.site.url')].each do |attr|
+          expect(page).to have_content([attr, t('activerecord.errors.messages.blank')].join(' '))
+        end
+      end
+
+      scenario 'when url is not valid' do
+        fill_in t('activerecord.attributes.site.name'), with: new_name
+        fill_in t('activerecord.attributes.site.url'), with: new_invalid_url
+        click_on t('helpers.submit.update')
+
+        expect(page).to have_content(
+          [t('activerecord.attributes.site.url'), t('activerecord.errors.messages.invalid')].join(' ')
+        )
+      end
+    end
+  end
+
+  describe 'Authenticated not authorized user' do
+    background do
+      sign_in(user2)
+      visit sites_path
+    end
+
+    scenario "can not update another user's site" do
+      within 'table' do
+        expect(page).not_to have_content t('links.edit')
+      end
     end
   end
 end

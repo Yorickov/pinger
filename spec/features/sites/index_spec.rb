@@ -2,18 +2,30 @@
 
 require 'rails_helper'
 
-feature 'Guest can see all sites added for monitoring' do
-  given!(:sites) { create_list(:site, 2) }
+feature 'User can see all sites added by him for monitoring' do
+  given!(:user1) { create(:user_with_sites) }
+  given!(:user2) { create(:user_with_sites) }
 
-  background { visit root_path }
+  describe 'Authenticated user' do
+    background do
+      sign_in(user1)
+      click_on t('label.all_sites')
+    end
 
-  scenario 'Guest try to see sites' do
-    click_on t('label.all_sites')
-
-    within 'table' do
-      sites.each do |site|
-        [site.name, site.url].each { |content| expect(page).to have_content(content) }
+    scenario 'sees his sites but not others' do
+      within 'table' do
+        [user1.sites.first.name, user1.sites.first.url].each { |content| expect(page).to have_content(content) }
+        expect(page).not_to have_content(user2.sites.first.name)
       end
+    end
+  end
+
+  describe 'Guest' do
+    background { visit root_path }
+
+    scenario "doesn't see site list, so he can't" \
+      'manipulate (show, update, destroy) with any site' do
+      expect(page).not_to have_content t('label.all_sites')
     end
   end
 end

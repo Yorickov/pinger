@@ -21,38 +21,59 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:attributes) { attributes_for(:user) }
+  describe 'User registration' do
+    let(:attributes) { attributes_for(:user) }
 
-  context 'with valid values' do
-    it 'valid email & password' do
-      user = User.new(attributes)
-      expect(user).to be_valid
+    context 'with valid values' do
+      it 'valid email & password' do
+        user = User.new(attributes)
+        expect(user).to be_valid
+      end
+    end
+
+    context 'with invalid values' do
+      it 'invalid email format' do
+        attributes[:email] = 'invalid_email'
+        user = User.new(attributes)
+        expect(user).not_to be_valid
+      end
+
+      it 'empty email' do
+        attributes[:email] = ''
+        user = User.new(attributes)
+        expect(user).not_to be_valid
+      end
+
+      it 'empty password' do
+        attributes[:password] = ''
+        user = User.new(attributes)
+        expect(user).not_to be_valid
+      end
+
+      it 'short password (less then 6 symbols)' do
+        attributes[:password] = '12345'
+        user = User.new(attributes)
+        expect(user).not_to be_valid
+      end
     end
   end
 
-  context 'with invalid values' do
-    it 'invalid email format' do
-      attributes[:email] = 'invalid_email'
-      user = User.new(attributes)
-      expect(user).not_to be_valid
-    end
+  describe 'Associations' do
+    it { should have_many(:sites).dependent(:destroy) }
+  end
 
-    it 'empty email' do
-      attributes[:email] = ''
-      user = User.new(attributes)
-      expect(user).not_to be_valid
-    end
+  describe 'Methods' do
+    describe '#own_site?' do
+      let(:user1) { create(:user_with_sites) }
+      let(:user2) { create(:user) }
 
-    it 'empty password' do
-      attributes[:password] = ''
-      user = User.new(attributes)
-      expect(user).not_to be_valid
-    end
+      context 'when user added site' do
+        it { expect(user1).to be_own_site(user1.sites.first) }
+      end
 
-    it 'short password (less then 6 symbols)' do
-      attributes[:password] = '12345'
-      user = User.new(attributes)
-      expect(user).not_to be_valid
+      context 'when user did not add site' do
+        it { expect(user2).not_to be_own_site(user1.sites.first) }
+      end
     end
   end
 end
