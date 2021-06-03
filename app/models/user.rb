@@ -25,8 +25,4 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :sites, dependent: :destroy
-
-  def own_site?(site)
-    id == site.user_id
-  end
 end

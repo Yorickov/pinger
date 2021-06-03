@@ -61,19 +61,4 @@ RSpec.describe User, type: :model do
   describe 'Associations' do
     it { should have_many(:sites).dependent(:destroy) }
   end
-
-  describe 'Methods' do
-    describe '#own_site?' do
-      let(:user1) { create(:user_with_sites) }
-      let(:user2) { create(:user) }
-
-      context 'when user added site' do
-        it { expect(user1).to be_own_site(user1.sites.first) }
-      end
-
-      context 'when user did not add site' do
-        it { expect(user2).not_to be_own_site(user1.sites.first) }
-      end
-    end
-  end
 end

@@ -94,13 +94,23 @@ RSpec.describe 'Sites', type: :request do
   describe 'GET /show:id' do
     let(:site) { user1.sites.first }
 
-    context 'as authenticated User' do
+    context 'as authenticated authorized User' do
       before { sign_in(user1) }
 
       it 'returns 200' do
         get "/sites/#{site.id}"
 
         expect(response).to have_http_status(:success)
+      end
+    end
+
+    context 'as authenticated not authorized User' do
+      before { sign_in(user2) }
+
+      it 'redirect to root' do
+        get "/sites/#{site.id}"
+
+        expect(response).to have_http_status(:redirect)
       end
     end
 
@@ -163,8 +173,8 @@ RSpec.describe 'Sites', type: :request do
         expect(site.name).to eq original_name
       end
 
-      it 'returns 403' do
-        expect(response).to have_http_status(:forbidden)
+      it 'redirects to root' do
+        expect(response).to have_http_status(:redirect)
       end
     end
 
@@ -204,10 +214,10 @@ RSpec.describe 'Sites', type: :request do
     context 'as authenticated not authorized User' do
       before { sign_in(user2) }
 
-      it 'returns 403' do
+      it 'redirects to root' do
         delete "/sites/#{site.id}"
 
-        expect(response).to have_http_status(:forbidden)
+        expect(response).to have_http_status(:redirect)
       end
 
       it 'does not delete site from database' do

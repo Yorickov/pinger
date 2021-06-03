@@ -34,7 +34,15 @@ en:
     site_created: 'Site created'
     site_updated: 'Site updated'
     site_deleted: 'Site deleted'
-    no_authorized: You are not authorized
+    required_log_in: Must be logged in
+
+  pundit:
+    default: You are not authorized to perform this action
+    site_policy:
+      update?: You cannot update this site!
+      edit?: You cannot edit this site!
+      show?: You cannot show this site!
+      destroy?: You cannot delete this site!
 
   sites:
     index:
