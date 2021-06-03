@@ -10,7 +10,6 @@ feature 'Uer can delete his site' do
   describe 'Authenticated authorized user' do
     background do
       sign_in(user1)
-      visit sites_path
     end
 
     scenario 'deletes his site' do
@@ -27,7 +26,6 @@ feature 'Uer can delete his site' do
   describe 'Authenticated not authorized user' do
     background do
       sign_in(user2)
-      visit sites_path
     end
 
     scenario "fails to delete another user's site" do

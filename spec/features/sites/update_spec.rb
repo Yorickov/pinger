@@ -14,7 +14,6 @@ feature 'User can update site added by him for monitoring' do
   describe 'Authenticated authorized user' do
     background do
       sign_in(user1)
-      visit sites_path
       within 'table' do
         click_on t('links.edit')
       end
@@ -54,7 +53,6 @@ feature 'User can update site added by him for monitoring' do
   describe 'Authenticated not authorized user' do
     background do
       sign_in(user2)
-      visit sites_path
     end
 
     scenario "can not update another user's site" do

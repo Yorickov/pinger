@@ -9,7 +9,6 @@ feature 'User can see info about any of his sites' do
   describe 'Authenticated user' do
     background do
       sign_in(user)
-      visit sites_path
     end
 
     scenario 'can see info about second site' do
