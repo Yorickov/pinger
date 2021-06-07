@@ -4,12 +4,15 @@
 #
 # Table name: sites
 #
-#  id         :bigint           not null, primary key
-#  name       :string           not null
-#  url        :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint
+#  id             :bigint           not null, primary key
+#  enabled        :boolean          default(TRUE)
+#  last_pinged_at :integer
+#  name           :string           not null
+#  status         :string           default("inactive")
+#  url            :string           not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  user_id        :bigint
 #
 # Indexes
 #

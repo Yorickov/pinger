@@ -5,8 +5,10 @@ ruby '3.0.1'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise', '~> 4.8.0'
+gem 'faraday'
 gem 'flash_rails_messages'
 gem 'jbuilder', '~> 2.7'
+gem 'parallel'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'pundit'
@@ -43,4 +45,6 @@ group :test do
   gem 'launchy'
   gem 'pundit-matchers', '~> 1.6.0'
   gem 'shoulda-matchers'
+  gem 'timecop'
+  gem 'webmock'
 end
