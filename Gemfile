@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -6,6 +8,7 @@ ruby '3.0.1'
 gem 'aasm'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise', '~> 4.8.0'
+gem 'devise-i18n'
 gem 'faraday'
 gem 'flash_rails_messages'
 gem 'jbuilder', '~> 2.7'
