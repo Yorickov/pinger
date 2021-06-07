@@ -47,6 +47,12 @@ en:
       show?: You cannot show this site!
       destroy?: You cannot delete this site!
 
+  navigation:
+    sign_up: 'Sign up'
+    log_in: 'Log in'
+    edit_profile: 'Edit profile'
+    log_out: 'Log out'
+    
   sites:
     index:
       name: Site name

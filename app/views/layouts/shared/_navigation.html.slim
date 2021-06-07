@@ -9,13 +9,13 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
     ul.navbar-nav
       - if user_signed_in?
         li
-          = link_to 'Edit profile', edit_user_registration_path, class: 'nav-link'
+          = link_to t('navigation.edit_profile'), edit_user_registration_path, class: 'nav-link'
         li
-          = link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'nav-link'
+          = link_to t('navigation.log_out'), destroy_user_session_path, method: :delete, class: 'nav-link'
       - else
         li
-          = link_to 'Sign Up', new_user_registration_path, class: 'nav-link'
+          = link_to t('navigation.sign_up'), new_user_registration_path, class: 'nav-link'
         li
-          = link_to 'LogIn', new_user_session_path, class: 'nav-link'
+          = link_to t('navigation.log_in'), new_user_session_path, class: 'nav-link'
 
 = render_flash_messages dismissible: true

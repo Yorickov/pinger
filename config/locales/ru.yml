@@ -38,6 +38,12 @@ ru:
     site_updated: 'Сайт изменен'
     site_deleted: 'Сайт удален'
 
+  navigation:
+    sign_up: 'Зарегистрироваться'
+    log_in: 'Войти'
+    edit_profile: 'Редактировать профиль'
+    log_out: 'Выйти'
+  
   pundit:
     default: У Вас нет прав на совершение таких действий
     site_policy:
