@@ -1,18 +1,18 @@
 ru:
   activerecord:
     models:
-      site: 'Site'
+      site: Site
     attributes:
       site:
-        url: 'Адрес'
-        name: 'Название'
-        protocol: 'Протокол'
-        interval: 'Интервал'
+        url: Адрес
+        name: Название
+        protocol: Протокол
+        interval: Интервал
 
   helpers:
     submit:
-      create: 'Добавить сайт'
-      update: 'Сохранить изменения'
+      create: Добавить сайт
+      update: Сохранить изменения
 
   links:
     edit: Редактировать
@@ -21,29 +21,29 @@ ru:
     ping: Тестовый пинг
 
   app:
-    name: 'Пингер'
-    short_description: 'Простой сервис, который проверяет избранные сайты и сообщает, если они становятся недоступны.'
+    name: Пингер
+    short_description: Простой сервис, который проверяет избранные сайты и сообщает, если они становятся недоступны.
 
   form:
-    add_site: 'Добавить сайт для мониторинга'
-    edit_site: 'Редактировать сайт'
+    add_site: Добавить сайт для мониторинга
+    edit_site: Редактировать сайт
 
   label:
-    add_site: 'Добавить новый сайт'
-    all_sites: 'Все сайты'
-    try_it: 'Попробовать'
+    add_site: Добавить новый сайт
+    all_sites: Все сайты
+    try_it: Попробовать
 
   message:
-    site_created: 'Сайт создан'
-    site_updated: 'Сайт изменен'
-    site_deleted: 'Сайт удален'
+    site_created: Сайт создан
+    site_updated: Сайт изменен
+    site_deleted: Сайт удален
 
   navigation:
-    sign_up: 'Зарегистрироваться'
-    log_in: 'Войти'
-    edit_profile: 'Редактировать профиль'
-    log_out: 'Выйти'
-  
+    sign_up: Зарегистрироваться
+    log_in: Войти
+    edit_profile: Редактировать профиль
+    log_out: Выйти
+
   pundit:
     default: У Вас нет прав на совершение таких действий
     site_policy:

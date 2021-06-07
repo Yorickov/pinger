@@ -1,18 +1,18 @@
 en:
   activerecord:
     models:
-      site: 'Site'
+      site: Site
     attributes:
       site:
-        url: 'URL'
-        name: 'Name'
-        protocol: 'Protocol'
-        interval: 'Interval'
+        url: URL
+        name: Name
+        protocol: Protocol
+        interval: Interval
 
   helpers:
     submit:
-      create: 'Add site'
-      update: 'Save changes'
+      create: Add site
+      update: Save changes
 
   links:
     edit: Edit
@@ -21,22 +21,22 @@ en:
     ping: Test ping
 
   app:
-    name: 'Pinger'
-    short_description: 'A simple service that checks your favorite sites periodically and alerts you when they go down.'
+    name: Pinger
+    short_description: A simple service that checks your favorite sites periodically and alerts you when they go down.
 
   form:
-    add_site: 'Add site for monitoring'
-    edit_site: 'Edit site'
+    add_site: Add site for monitoring
+    edit_site: Edit site
 
   label:
-    add_site: 'Add new site'
-    all_sites: 'All sites'
-    try_it: 'Try it out'
+    add_site: Add new site
+    all_sites: All sites
+    try_it: Try it out
 
   message:
-    site_created: 'Site created'
-    site_updated: 'Site updated'
-    site_deleted: 'Site deleted'
+    site_created: Site created
+    site_updated: Site updated
+    site_deleted: Site deleted
     required_log_in: Must be logged in
 
   pundit:
@@ -48,11 +48,11 @@ en:
       destroy?: You cannot delete this site!
 
   navigation:
-    sign_up: 'Sign up'
-    log_in: 'Log in'
-    edit_profile: 'Edit profile'
-    log_out: 'Log out'
-    
+    sign_up: Sign up
+    log_in: Log in
+    edit_profile: Edit profile
+    log_out: Log out
+
   sites:
     index:
       name: Site name
