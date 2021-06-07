@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-feature 'Uer can delete his site' do
+feature 'User can delete his site' do
   given(:user1) { create(:user) }
   given!(:site) { create(:site, user: user1) }
   given(:user2) { create(:user) }
