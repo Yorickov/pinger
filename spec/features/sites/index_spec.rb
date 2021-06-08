@@ -24,7 +24,7 @@ feature 'User can see all sites added by him for monitoring' do
     background { visit root_path }
 
     scenario "doesn't see site list, so he can't" \
-      'manipulate (show, update, destroy) with any site' do
+      'manipulate (show, update, destroy, ping) with any site' do
       expect(page).not_to have_content t('label.all_sites')
     end
   end

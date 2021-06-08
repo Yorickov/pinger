@@ -4,13 +4,13 @@
 #
 # Table name: logs
 #
-#  id            :bigint           not null, primary key
-#  code          :integer
-#  response_time :integer
-#  status        :string           not null
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  site_id       :bigint           not null
+#  id               :bigint           not null, primary key
+#  response_message :text
+#  response_time    :integer
+#  status           :string           not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  site_id          :bigint           not null
 #
 # Indexes
 #
@@ -23,8 +23,8 @@
 FactoryBot.define do
   factory :log do
     status { 'MyString' }
-    code { 1 }
-    response_time { 1 }
+    response_message { 'OK' }
+    response_time { 100 }
     site
   end
 end

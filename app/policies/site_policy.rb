@@ -17,6 +17,10 @@ class SitePolicy < ApplicationPolicy
     user.present? && owner?
   end
 
+  def ping?
+    show?
+  end
+
   class Scope < Scope
     def resolve
       scope.all

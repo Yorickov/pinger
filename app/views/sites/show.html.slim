@@ -1,6 +1,10 @@
 .row
   .col-lg-6.col-md-8.mx-auto
     .card.site-info
-      .card-body
+      .card-header
         h5.card-title = @site.name
-        .card-text = @site.url
+      .card-body
+        .card-text.mb-3 = @site.url
+      .card-footer.d-flex.justify-content-between
+        = link_to t('links.ping'), ping_site_path(@site), remote: true, data: { type: :json }, class: 'btn btn-primary ping-link'
+        .mw-3 data-site-id="#{@site.id}"

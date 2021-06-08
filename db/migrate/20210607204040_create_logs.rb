@@ -3,7 +3,7 @@ class CreateLogs < ActiveRecord::Migration[6.1]
     create_table :logs do |t|
       t.references :site, null: false, foreign_key: true
       t.string :status, null: false
-      t.integer :code
+      t.text :response_message
       t.integer :response_time
 
       t.timestamps

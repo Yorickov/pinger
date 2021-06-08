@@ -44,7 +44,9 @@ group :test do
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
   gem 'launchy'
   gem 'pundit-matchers', '~> 1.6.0'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'timecop'
+  gem 'webdrivers'
   gem 'webmock'
 end

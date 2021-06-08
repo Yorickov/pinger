@@ -2,7 +2,7 @@
 
 class SitesController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_site, only: %i[show edit update destroy]
+  before_action :load_site, only: %i[show edit update destroy ping]
 
   def index
     @sites = current_user.sites
@@ -46,6 +46,13 @@ class SitesController < ApplicationController
     @site.destroy
 
     redirect_to sites_path, notice: t('message.site_deleted')
+  end
+
+  def ping
+    authorize @site
+
+    ping_info = PingService.call(@site)
+    render json: { id: @site.id, **ping_info }
   end
 
   private

@@ -6,7 +6,7 @@ RSpec.describe PersistPingService do
   subject(:service_called) { described_class.call(site) }
 
   let(:site) { create(:site, user: create(:user)) }
-  let(:response) { { status: 'successfull', code: 200, response_time: 100 } }
+  let(:response) { { status: 'success', response_message: 'OK', response_time: 100 } }
   let(:time) { Time.now.utc }
 
   before do
@@ -37,15 +37,26 @@ RSpec.describe PersistPingService do
   end
 
   describe 'Service called' do
-    context 'with successfully pinged site' do
-      it 'creates log with successfull status' do
+    context 'when site pinged with code 100-300' do
+      it 'creates log with success status' do
         service_called
 
         expect(site.logs.last).to have_attributes(**response)
       end
     end
 
-    context 'with unsuccessfully pinged site' do
+    context 'when site pinged with code 400-500' do
+      it 'creates log with failed status' do
+        response[:status] = 'failed'
+        response[:response_message] = 'Internal Server Error'
+
+        service_called
+
+        expect(site.logs.last).to have_attributes(**response)
+      end
+    end
+
+    context 'when site pinged with error' do
       let(:response) { { status: 'errored' } }
 
       it 'creates log with errored status' do

@@ -10,7 +10,7 @@ RSpec.describe SitePolicy, type: :policy do
   context 'for a Guest' do
     let(:user) { nil }
 
-    it { should forbid_actions(%i[edit show update destroy]) }
+    it { should forbid_actions(%i[edit show update destroy ping]) }
   end
 
   context 'for a User' do
@@ -19,11 +19,11 @@ RSpec.describe SitePolicy, type: :policy do
     context 'who added site' do
       let(:site) { build(:site, user: user) }
 
-      it { should permit_actions(%i[edit show update destroy]) }
+      it { should permit_actions(%i[edit show update destroy ping]) }
     end
 
     context 'who did not add site' do
-      it { should forbid_actions(%i[edit show update destroy]) }
+      it { should forbid_actions(%i[edit show update destroy ping]) }
     end
   end
 end

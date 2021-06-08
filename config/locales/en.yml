@@ -16,6 +16,7 @@ en:
     edit: Edit
     delete: Delete
     confirm: Are you shure?
+    ping: Test ping
 
   app:
     name: 'Pinger'

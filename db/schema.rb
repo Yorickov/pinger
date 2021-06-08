@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2021_06_07_204040) do
   create_table "logs", force: :cascade do |t|
     t.bigint "site_id", null: false
     t.string "status", null: false
-    t.integer "code"
+    t.text "response_message"
     t.integer "response_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

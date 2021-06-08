@@ -33,7 +33,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   scope '(:locale)', locale: /en|ru/ do
-    resources :sites
+    resources :sites do
+      get 'ping', on: :member
+    end
   end
 
   get '/:locale' => 'landing#index'

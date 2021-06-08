@@ -48,6 +48,9 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
+  Capybara.javascript_driver = :selenium_chrome_headless
+  Capybara.default_max_wait_time = 3
+
   config.use_transactional_fixtures = true
   config.include AbstractController::Translation
   # You can uncomment this line to turn off ActiveRecord support entirely.
