@@ -38,5 +38,6 @@ RSpec.describe Site, type: :model do
 
   describe 'Associations' do
     it { should belong_to(:user) }
+    it { should have_many(:logs).dependent(:destroy) }
   end
 end
