@@ -6,8 +6,10 @@
 #
 #  id             :bigint           not null, primary key
 #  enabled        :boolean          default(TRUE)
+#  interval       :integer          not null
 #  last_pinged_at :integer
 #  name           :string           not null
+#  protocol       :string           not null
 #  status         :string           default("inactive")
 #  url            :string           not null
 #  created_at     :datetime         not null
@@ -25,19 +27,50 @@
 require 'rails_helper'
 
 RSpec.describe Site, type: :model do
-  let(:valid_url) { Faker::Internet.url }
+  let(:site) { build(:site) }
   let(:invalid_url) { Faker::Name.name }
 
   describe 'Validation' do
     it { should validate_presence_of(:name) }
-
     it { should validate_presence_of(:url) }
-    it { should allow_value(valid_url).for(:url) }
-    it { should_not allow_value(invalid_url).for(:url) }
+    it { should validate_presence_of(:interval) }
+    it { should validate_presence_of(:protocol) }
+    it { should validate_inclusion_of(:protocol).in_array(%w[http:// https://]) }
+
+    describe 'Url' do
+      it 'creates site with correct url format' do
+        expect(site).to be_valid
+      end
+
+      it 'does not create site with wrong url format' do
+        def site.full_url
+          'wrong url'
+        end
+
+        expect(site).not_to be_valid
+        expect(site.errors[:url]).to eq ['has wrong format']
+      end
+
+      it 'does not validate fromat if url absents' do
+        site.url = nil
+        def site.full_url
+          'wrong url'
+        end
+        site.validate
+
+        expect(site.errors[:url]).to eq ["can't be blank"]
+      end
+    end
   end
 
   describe 'Associations' do
     it { should belong_to(:user) }
     it { should have_many(:logs).dependent(:destroy) }
+  end
+
+  describe 'Methods' do
+    describe '#full_url' do
+      it { expect(site.full_url).to eq [site.protocol, site.url].join }
+    end
   end
 end

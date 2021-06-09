@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_07_204040) do
+ActiveRecord::Schema.define(version: 2021_06_08_234139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 2021_06_07_204040) do
     t.boolean "enabled", default: true
     t.string "status", default: "inactive"
     t.integer "last_pinged_at"
+    t.string "protocol", null: false
+    t.integer "interval", null: false
     t.index ["user_id"], name: "index_sites_on_user_id"
   end
 

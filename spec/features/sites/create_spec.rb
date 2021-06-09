@@ -5,6 +5,7 @@ require 'rails_helper'
 feature 'User can add site for monitoring' do
   given(:user) { create(:user) }
   given(:name) { attributes_for(:site)[:name] }
+  given(:interval) { attributes_for(:site)[:interval] }
   given(:valid_url) { attributes_for(:site)[:url] }
   given(:invalid_url) { attributes_for(:site, :invalid)[:url] }
 
@@ -17,6 +18,7 @@ feature 'User can add site for monitoring' do
     scenario 'adds site successfully' do
       fill_in t('activerecord.attributes.site.name'), with: name
       fill_in t('activerecord.attributes.site.url'), with: valid_url
+      fill_in t('activerecord.attributes.site.interval'), with: interval
       click_on t('helpers.submit.create')
 
       within '.site-info' do
@@ -25,22 +27,10 @@ feature 'User can add site for monitoring' do
     end
 
     describe 'failes to add site' do
-      scenario 'without name and url' do
+      scenario 'without name' do
         click_on t('helpers.submit.create')
 
-        [t('activerecord.attributes.site.name'), t('activerecord.attributes.site.url')].each do |attr|
-          expect(page).to have_content([attr, t('activerecord.errors.messages.blank')].join(' '))
-        end
-      end
-
-      scenario 'when url is not valid' do
-        fill_in t('activerecord.attributes.site.name'), with: name
-        fill_in t('activerecord.attributes.site.url'), with: invalid_url
-        click_on t('helpers.submit.create')
-
-        expect(page).to have_content(
-          [t('activerecord.attributes.site.url'), t('activerecord.errors.messages.invalid')].join(' ')
-        )
+        expect(page).to have_content([t('activerecord.attributes.site.name'), t('activerecord.errors.messages.blank')].join(' '))
       end
     end
   end

@@ -6,6 +6,7 @@ module PingService
   def call(site)
     return if site.enabled == false
 
-    Client::HttpRequest.call(site.url)
+    # TODO: pass url not site
+    Client::HttpRequest.call(site.full_url)
   end
 end

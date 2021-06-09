@@ -37,16 +37,6 @@ feature 'User can update site added by him for monitoring' do
           expect(page).to have_content([attr, t('activerecord.errors.messages.blank')].join(' '))
         end
       end
-
-      scenario 'when url is not valid' do
-        fill_in t('activerecord.attributes.site.name'), with: new_name
-        fill_in t('activerecord.attributes.site.url'), with: new_invalid_url
-        click_on t('helpers.submit.update')
-
-        expect(page).to have_content(
-          [t('activerecord.attributes.site.url'), t('activerecord.errors.messages.invalid')].join(' ')
-        )
-      end
     end
   end
 

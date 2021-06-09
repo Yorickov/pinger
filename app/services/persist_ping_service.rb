@@ -34,6 +34,6 @@ class PersistPingService
   end
 
   def make_response
-    Client::HttpRequest.call(site.url)
+    Client::HttpRequest.call(site.full_url)
   end
 end

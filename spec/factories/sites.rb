@@ -6,8 +6,10 @@
 #
 #  id             :bigint           not null, primary key
 #  enabled        :boolean          default(TRUE)
+#  interval       :integer          not null
 #  last_pinged_at :integer
 #  name           :string           not null
+#  protocol       :string           not null
 #  status         :string           default("inactive")
 #  url            :string           not null
 #  created_at     :datetime         not null
@@ -25,11 +27,16 @@
 FactoryBot.define do
   factory :site do
     name { Faker::Name.name }
-    url { Faker::Internet.url }
+    url { 'github.com' }
+
+    protocol { 'https://' }
+    interval { 1 }
+
     user
 
+    # TODO: change
     trait :invalid do
-      url { Faker::Name.name }
+      url { nil }
     end
   end
 end

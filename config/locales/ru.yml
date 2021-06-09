@@ -6,6 +6,8 @@ ru:
       site:
         url: 'Адрес'
         name: 'Название'
+        protocol: 'Протокол'
+        interval: 'Интервал'
 
   helpers:
     submit:

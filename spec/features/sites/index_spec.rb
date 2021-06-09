@@ -14,7 +14,7 @@ feature 'User can see all sites added by him for monitoring' do
 
     scenario 'sees his sites but not others' do
       within 'table' do
-        [user1.sites.first.name, user1.sites.first.url].each { |content| expect(page).to have_content(content) }
+        [user1.sites.first.name, user1.sites.first.full_url].each { |content| expect(page).to have_content(content) }
         expect(page).not_to have_content(user2.sites.first.name)
       end
     end

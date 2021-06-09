@@ -14,7 +14,7 @@ feature 'User can see info about any of his sites' do
       find('table>tbody>tr:last-child').click_on site.name
 
       within '.site-info' do
-        [site.name, site.url].each { |content| expect(page).to have_content(content) }
+        [site.name, site.full_url].each { |content| expect(page).to have_content(content) }
       end
     end
   end

@@ -12,7 +12,7 @@ feature 'User can ping site without saving data in database' do
 
     scenario 'sees ping success results', js: true do
       visit "/sites/#{site.id}"
-      stub_valid_request(site.url, 200)
+      stub_valid_request(site.full_url, 200)
 
       within '.site-info' do
         click_on t('links.ping')
@@ -23,7 +23,7 @@ feature 'User can ping site without saving data in database' do
 
     scenario 'sees ping failed results', js: true do
       visit "/sites/#{site.id}"
-      stub_valid_request(site.url, 500)
+      stub_valid_request(site.full_url, 500)
 
       within '.site-info' do
         click_on t('links.ping')
@@ -34,7 +34,7 @@ feature 'User can ping site without saving data in database' do
 
     scenario 'sees ping errored results', js: true do
       visit "/sites/#{site.id}"
-      stub_error_request(site.url)
+      stub_error_request(site.full_url)
 
       within '.site-info' do
         click_on t('links.ping')

@@ -13,13 +13,13 @@ feature 'User can delete his site' do
     end
 
     scenario 'deletes his site' do
-      [site.name, site.url].each { |content| expect(page).to have_content(content) }
+      [site.name, site.full_url].each { |content| expect(page).to have_content(content) }
 
       within 'table' do
         click_on t('links.delete')
       end
 
-      [site.name, site.url].each { |content| expect(page).not_to have_content(content) }
+      [site.name, site.full_url].each { |content| expect(page).not_to have_content(content) }
     end
   end
 

@@ -6,6 +6,8 @@ en:
       site:
         url: 'URL'
         name: 'Name'
+        protocol: 'Protocol'
+        interval: 'Interval'
 
   helpers:
     submit:

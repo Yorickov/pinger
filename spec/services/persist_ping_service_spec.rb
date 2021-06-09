@@ -12,7 +12,7 @@ RSpec.describe PersistPingService do
   before do
     allow(Client::HttpRequest)
       .to receive(:call)
-      .with(site.url)
+      .with(site.full_url)
       .and_return(response)
   end
 

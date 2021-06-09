@@ -8,7 +8,7 @@ RSpec.describe PingService do
   context 'when site enabled' do
     it 'pinging http-service called' do
       expect(Client::HttpRequest)
-        .to receive(:call).with(site.url).and_call_original
+        .to receive(:call).with(site.full_url).and_call_original
 
       described_class.call(site)
     end
@@ -17,7 +17,7 @@ RSpec.describe PingService do
   context 'when site disabled' do
     it 'pinging http-service did not call' do
       expect(Client::HttpRequest)
-        .not_to receive(:call).with(site.url).and_call_original
+        .not_to receive(:call).with(site.full_url).and_call_original
 
       site.enabled = false
 
