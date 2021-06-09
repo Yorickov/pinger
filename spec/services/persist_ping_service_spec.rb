@@ -9,12 +9,7 @@ RSpec.describe PersistPingService do
   let(:response) { { status: 'success', response_message: 'OK', response_time: 100 } }
   let(:time) { Time.now.utc }
 
-  before do
-    allow(Client::HttpRequest)
-      .to receive(:call)
-      .with(site.full_url)
-      .and_return(response)
-  end
+  before { mock_ping_http_client(site, response) }
 
   before { Timecop.freeze(time) }
   after { Timecop.return }

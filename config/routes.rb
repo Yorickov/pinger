@@ -34,7 +34,8 @@ Rails.application.routes.draw do
 
   scope '(:locale)', locale: /en|ru/ do
     resources :sites do
-      get 'ping', on: :member
+      get :ping_current, on: :member
+      get :ping_new, on: :collection
     end
   end
 

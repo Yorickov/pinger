@@ -2,18 +2,19 @@
 
 require 'rails_helper'
 
-feature 'User can ping site without saving data in database' do
-  given(:user1) { create(:user) }
-  given(:user2) { create(:user) }
-  given(:site) { create(:site, user: user1) }
+feature 'User can ping his site without saving data in database' do
+  given(:user) { create(:user) }
+  given(:site) { create(:site, user: user) }
+  given(:response) { { status: 'success', response_message: 'OK', response_time: 100 } }
 
   describe 'Authenticated authorized user' do
-    background { sign_in(user1) }
+    background { mock_ping_http_client(site, response) }
+    background do
+      sign_in(user)
+      visit "/sites/#{site.id}"
+    end
 
     scenario 'sees ping success results', js: true do
-      visit "/sites/#{site.id}"
-      stub_valid_request(site.full_url, 200)
-
       within '.site-info' do
         click_on t('links.ping')
 
@@ -22,8 +23,7 @@ feature 'User can ping site without saving data in database' do
     end
 
     scenario 'sees ping failed results', js: true do
-      visit "/sites/#{site.id}"
-      stub_valid_request(site.full_url, 500)
+      response[:status] = 'failed'
 
       within '.site-info' do
         click_on t('links.ping')
@@ -33,8 +33,7 @@ feature 'User can ping site without saving data in database' do
     end
 
     scenario 'sees ping errored results', js: true do
-      visit "/sites/#{site.id}"
-      stub_error_request(site.full_url)
+      response[:status] = 'errored'
 
       within '.site-info' do
         click_on t('links.ping')
@@ -45,7 +44,7 @@ feature 'User can ping site without saving data in database' do
   end
 
   describe 'Authenticated not authorized user' do
-    background { sign_in(user2) }
+    background { sign_in(create(:user)) }
 
     scenario 'do not see site info' do
       expect(page).not_to have_content(site.name)

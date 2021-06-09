@@ -5,23 +5,10 @@ require 'rails_helper'
 RSpec.describe PingService do
   let(:site) { create(:site, user: create(:user)) }
 
-  context 'when site enabled' do
-    it 'pinging http-service called' do
-      expect(Client::HttpRequest)
-        .to receive(:call).with(site.full_url).and_call_original
+  it 'pinging http-service called' do
+    expect(Client::HttpRequest)
+      .to receive(:call).with(site.full_url).and_call_original
 
-      described_class.call(site)
-    end
-  end
-
-  context 'when site disabled' do
-    it 'pinging http-service did not call' do
-      expect(Client::HttpRequest)
-        .not_to receive(:call).with(site.full_url).and_call_original
-
-      site.enabled = false
-
-      described_class.call(site)
-    end
+    described_class.call(site.full_url)
   end
 end

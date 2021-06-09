@@ -15,4 +15,11 @@ module MockHelpers
   def stub_error_request(url)
     stub_request(:get, url).to_raise(StandardError)
   end
+
+  def mock_ping_http_client(site, response)
+    allow(Client::HttpRequest)
+      .to receive(:call)
+      .with(site.full_url)
+      .and_return(response)
+  end
 end

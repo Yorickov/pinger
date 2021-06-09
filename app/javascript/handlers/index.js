@@ -1,7 +1,7 @@
-import pinger from './pinger';
+import testPinger from './testPinger';
 
 export default () => {
   document.addEventListener('turbolinks:load', () => {
-    pinger();
+    testPinger();
   });
 }

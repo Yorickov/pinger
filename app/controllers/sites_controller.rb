@@ -2,7 +2,7 @@
 
 class SitesController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_site, only: %i[show edit update destroy ping]
+  before_action :load_site, only: %i[show edit update destroy ping_current]
 
   def index
     @sites = current_user.sites
@@ -48,11 +48,15 @@ class SitesController < ApplicationController
     redirect_to sites_path, notice: t('message.site_deleted')
   end
 
-  def ping
+  def ping_current
     authorize @site
 
-    ping_info = PingService.call(@site)
-    render json: { id: @site.id, **ping_info }
+    render_ping_info_in_json(@site.full_url)
+  end
+
+  def ping_new
+    logger.info "Receiving url: #{params[:url]}"
+    render_ping_info_in_json(params[:url])
   end
 
   private
@@ -63,5 +67,10 @@ class SitesController < ApplicationController
 
   def load_site
     @site = Site.find(params[:id])
+  end
+
+  def render_ping_info_in_json(url)
+    ping_info = PingService.call(url)
+    render json: ping_info
   end
 end

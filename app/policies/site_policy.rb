@@ -17,7 +17,7 @@ class SitePolicy < ApplicationPolicy
     user.present? && owner?
   end
 
-  def ping?
+  def ping_current?
     show?
   end
 

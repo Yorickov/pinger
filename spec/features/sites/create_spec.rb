@@ -28,9 +28,13 @@ feature 'User can add site for monitoring' do
 
     describe 'failes to add site' do
       scenario 'without name' do
+        fill_in t('activerecord.attributes.site.url'), with: valid_url
         click_on t('helpers.submit.create')
 
-        expect(page).to have_content([t('activerecord.attributes.site.name'), t('activerecord.errors.messages.blank')].join(' '))
+        expect(page).to have_content([
+          t('activerecord.attributes.site.name'),
+          t('activerecord.errors.messages.blank')
+        ].join(' '))
       end
     end
   end

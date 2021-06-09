@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
+# TODO: remove without additional functions
 module PingService
   module_function
 
-  def call(site)
-    return if site.enabled == false
-
-    # TODO: pass url not site
-    Client::HttpRequest.call(site.full_url)
+  def call(url)
+    Client::HttpRequest.call(url)
   end
 end

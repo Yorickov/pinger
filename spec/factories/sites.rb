@@ -29,7 +29,7 @@ FactoryBot.define do
     name { Faker::Name.name }
     url { 'github.com' }
 
-    protocol { 'https://' }
+    protocol { 'http://' }
     interval { 1 }
 
     user
