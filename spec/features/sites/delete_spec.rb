@@ -10,12 +10,11 @@ feature 'User can delete his site' do
   describe 'Authenticated authorized user' do
     background do
       sign_in(user1)
+      visit "/sites/#{site.id}"
     end
 
     scenario 'deletes his site' do
-      [site.name, site.full_url].each { |content| expect(page).to have_content(content) }
-
-      within 'table' do
+      within '.card' do
         click_on t('links.delete')
       end
 
@@ -30,7 +29,7 @@ feature 'User can delete his site' do
 
     scenario "fails to delete another user's site" do
       within 'table' do
-        expect(page).not_to have_content t('links.delete')
+        expect(page).not_to have_content site.name
       end
     end
   end

@@ -14,7 +14,8 @@ feature 'User can update site added by him for monitoring' do
   describe 'Authenticated authorized user' do
     background do
       sign_in(user1)
-      within 'table' do
+      visit "/sites/#{site.id}"
+      within '.card' do
         click_on t('links.edit')
       end
     end
@@ -47,7 +48,7 @@ feature 'User can update site added by him for monitoring' do
 
     scenario "can not update another user's site" do
       within 'table' do
-        expect(page).not_to have_content t('links.edit')
+        expect(page).not_to have_content site.name
       end
     end
   end

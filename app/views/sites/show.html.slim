@@ -1,10 +1,13 @@
 .row
   .col-lg-6.col-md-8.mx-auto
     .card.site-info
-      .card-header
+      .card-header.d-flex.justify-content-between
         h5.card-title = @site.name
+        .settings
+          = link_to t('links.edit'), edit_site_path(@site), class: 'btn btn-sm btn-primary me-3'
+          = link_to t('links.delete'), @site, method: :delete, data: { confirm: t('links.confirm') }, class: 'btn btn-sm btn-danger'
       .card-body
         .card-text.mb-3 = @site.full_url
       .card-footer.d-flex.justify-content-between.ping-wrapper
-        = link_to t('links.ping'), ping_current_site_path(@site), remote: true, data: { type: :json }, class: 'btn btn-primary ping-link'
+        = link_to t('links.ping'), ping_current_site_path(@site), remote: true, data: { type: :json }, class: 'btn btn-outline-dark ping-link'
         .mw-3.ping-box

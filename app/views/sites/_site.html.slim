@@ -1,8 +1,8 @@
-tr
+tr.position-relative
   td
     = site.status
-  td.position-relative
-    = link_to site.name, site, class: 'stretched-link text-decoration-none'
+  td
+    = link_to site.name, site, class: 'stretched-link text-decoration-none text-dark fw-bold'
   td
     = site.full_url
   td
@@ -14,7 +14,3 @@ tr
   td
     - if site.last_pinged_at
       = site.logs.last.status
-
-  td
-    = link_to t('links.edit'), edit_site_path(site), class: 'btn btn-sm btn-primary me-3'
-    = link_to t('links.delete'), site, method: :delete, data: { confirm: t('links.confirm') }, class: 'btn btn-sm btn-danger'
