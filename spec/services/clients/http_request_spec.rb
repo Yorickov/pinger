@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Client::HttpRequest do
+RSpec.describe Clients::HttpRequest do
   subject(:service_called) { described_class.call(site.full_url) }
 
   let(:site) { create(:site, user: create(:user)) }

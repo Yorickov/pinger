@@ -5,6 +5,6 @@ module PingService
   module_function
 
   def call(url)
-    Client::HttpRequest.call(url)
+    Clients::HttpRequest.call(url)
   end
 end

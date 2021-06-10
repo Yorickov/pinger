@@ -1,8 +1,15 @@
 tr
+  td
+    = site.status
   td.position-relative
     = link_to site.name, site, class: 'stretched-link text-decoration-none'
   td
     = site.full_url
+  td
+    = site.interval
+  td
+    = site.last_pinged_at
+
   td
     = link_to t('links.edit'), edit_site_path(site), class: 'btn btn-sm btn-primary me-3'
     = link_to t('links.delete'), site, method: :delete, data: { confirm: t('links.confirm') }, class: 'btn btn-sm btn-danger'

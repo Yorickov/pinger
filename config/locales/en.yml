@@ -51,6 +51,9 @@ en:
     index:
       name: Site name
       url: Site URL
+      status: Status
+      interval: Interval
+      last_pinged_at: Last ping
       edit: Edit
       delete: Delete
       settings: Settings

@@ -14,10 +14,14 @@ gem 'puma', '~> 5.0'
 gem 'pundit'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
 gem 'rails-i18n', '~> 6.0.0'
+gem 'redis-rails'
 gem 'sass-rails', '>= 6'
+gem 'sidekiq'
+gem 'sinatra', require: false
 gem 'slim-rails'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 5.0'
+gem 'whenever', require: false
 
 group :development, :test do
   gem 'annotate', '~> 3.1.1'
@@ -49,4 +53,5 @@ group :test do
   gem 'timecop'
   gem 'webdrivers'
   gem 'webmock'
+  gem 'whenever-test'
 end

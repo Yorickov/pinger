@@ -50,6 +50,9 @@ ru:
     index:
       name: Название сайта
       url: Адрес сайта
+      status: Статус
+      interval: Интервал
+      last_pinged_at: Последний пинг
       edit: Редактировать
       delete: Удалить
       settings: Настройки

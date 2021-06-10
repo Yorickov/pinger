@@ -28,8 +28,13 @@
 #                          DELETE (/:locale)/sites/:id(.:format)      sites#destroy {:locale=>/en|ru/}
 #                          GET    /:locale(.:format)                  landing#index
 #                     root GET    /                                   landing#index
+require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  authenticate :user do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   devise_for :users
 
   scope '(:locale)', locale: /en|ru/ do

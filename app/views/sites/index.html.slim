@@ -1,8 +1,11 @@
 table.table.table-hover
   thead
     tr
+      th scope="col" = t('.status')
       th scope="col" = t('.name')
       th scope="col" = t('.url')
+      th scope="col" = t('.interval')
+      th scope="col" = t('.last_pinged_at')
       th scope="col" = t('.settings')
   tbody
     = render @sites

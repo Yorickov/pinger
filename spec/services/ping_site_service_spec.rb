@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe PersistPingService do
+RSpec.describe PingSiteService do
   subject(:service_called) { described_class.call(site) }
 
   let(:site) { create(:site, user: create(:user)) }
@@ -22,12 +22,6 @@ RSpec.describe PersistPingService do
     it 'initializes last_pinged_at and set status active' do
       expect { service_called }
         .to change(site, :last_pinged_at).to(time.to_i).and change(site, :status).to('active')
-    end
-
-    it 'does not work if site is already pinging' do
-      site.enabled = false
-
-      expect { service_called }.not_to change(Log, :count)
     end
   end
 

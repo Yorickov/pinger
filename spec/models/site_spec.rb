@@ -72,5 +72,44 @@ RSpec.describe Site, type: :model do
     describe '#full_url' do
       it { expect(site.full_url).to eq [site.protocol, site.url].join }
     end
+
+    describe '#ping_time?' do
+      let(:initial_time) { Time.now.utc }
+      let(:site) { build(:site, user: build(:user), interval: 5, last_pinged_at: initial_time.to_i, enabled: true) }
+
+      after(:all) { Timecop.return }
+
+      context 'when site enabled' do
+        context 'and more than interval time have passed since last pinged' do
+          before { Timecop.freeze(initial_time + 6.minutes) }
+
+          it { expect(site).to be_ping_time }
+        end
+
+        context 'and equal to interval time have passed since last pinged' do
+          before { Timecop.freeze(initial_time + 5.minutes) }
+
+          it { expect(site).to be_ping_time }
+        end
+
+        context 'and less than interval time have passed since last pinged' do
+          before { Timecop.freeze(initial_time + 3.minutes) }
+
+          it { expect(site).not_to be_ping_time }
+        end
+      end
+
+      context 'when site disabled' do
+        before { Timecop.freeze(initial_time + 6.minutes) }
+
+        specify do
+          site.enabled = false
+
+          expect(site).not_to be_ping_time
+        end
+      end
+
+      it { expect(site.full_url).to eq [site.protocol, site.url].join }
+    end
   end
 end

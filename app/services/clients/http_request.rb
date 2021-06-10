@@ -2,7 +2,7 @@
 
 require 'faraday'
 
-module Client
+module Clients
   class HttpRequest
     def self.call(*args)
       new(*args).call

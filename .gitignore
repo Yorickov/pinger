@@ -22,6 +22,7 @@ public/packs
 config/database.yml
 config/cable.yml
 config/master.key
+config/schedule.rb
 
 # Ignore Byebug command history file.
 .byebug_history

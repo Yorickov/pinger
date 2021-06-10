@@ -6,8 +6,8 @@ RSpec.describe PingService do
   let(:site) { create(:site, user: create(:user)) }
 
   it 'pinging http-service called' do
-    expect(Client::HttpRequest)
-      .to receive(:call).with(site.full_url).and_call_original
+    expect(Clients::HttpRequest)
+      .to receive(:call).with(site.full_url)
 
     described_class.call(site.full_url)
   end
