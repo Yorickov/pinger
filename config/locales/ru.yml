@@ -53,6 +53,7 @@ ru:
       status: Статус
       interval: Интервал
       last_pinged_at: Последний пинг
+      last_pinged_result: Последний результат
       edit: Редактировать
       delete: Удалить
       settings: Настройки

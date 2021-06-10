@@ -22,7 +22,7 @@
 #
 FactoryBot.define do
   factory :log do
-    status { 'MyString' }
+    status { 'success' }
     response_message { 'OK' }
     response_time { 100 }
     site

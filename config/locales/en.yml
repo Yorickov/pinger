@@ -54,6 +54,7 @@ en:
       status: Status
       interval: Interval
       last_pinged_at: Last ping
+      last_pinged_result: Last result
       edit: Edit
       delete: Delete
       settings: Settings

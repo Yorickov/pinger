@@ -18,30 +18,34 @@ RSpec.describe PingSiteService do
     it 'creates log' do
       expect { service_called }.to change(Log, :count).by(1)
     end
-
-    it 'initializes last_pinged_at and set status active' do
-      expect { service_called }
-        .to change(site, :last_pinged_at).to(time.to_i).and change(site, :status).to('active')
-    end
   end
 
   describe 'Service called' do
     context 'when site pinged with code 100-300' do
-      it 'creates log with success status' do
+      it 'creates log with success status and sets site status active' do
         service_called
 
         expect(site.logs.last).to have_attributes(**response)
       end
+
+      it 'sets status active' do
+        expect { service_called }
+          .to change(site, :status).to('active')
+      end
     end
 
     context 'when site pinged with code 400-500' do
-      it 'creates log with failed status' do
-        response[:status] = 'failed'
-        response[:response_message] = 'Internal Server Error'
+      let(:response) { { status: 'failed', response_message: 'Internal Server Error' } }
 
+      it 'creates log with failed status' do
         service_called
 
         expect(site.logs.last).to have_attributes(**response)
+      end
+
+      it 'remain status inactive' do
+        expect { service_called }
+          .not_to change(site, :status)
       end
     end
 
@@ -52,6 +56,11 @@ RSpec.describe PingSiteService do
         service_called
 
         expect(site.logs.last).to have_attributes(**response)
+      end
+
+      it 'remain status inactive' do
+        expect { service_called }
+          .not_to change(site, :status)
       end
     end
   end

@@ -21,7 +21,15 @@
 #  fk_rails_...  (site_id => sites.id)
 #
 class Log < ApplicationRecord
+  include AASM
+
   belongs_to :site
 
   validates :status, presence: true
+
+  aasm column: 'status' do
+    state :success
+    state :failed
+    state :errored
+  end
 end

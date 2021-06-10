@@ -33,7 +33,7 @@ class PingSiteService
       site.logs.create!(**response)
       site.update!(
         last_pinged_at: normalize_current_time,
-        status: 'active',
+        status: change_status(response),
         enabled: true
       )
     end
@@ -41,5 +41,10 @@ class PingSiteService
 
   def normalize_current_time
     Time.now.utc.to_i
+  end
+
+  # TODO: very preliminary version
+  def change_status(response)
+    response[:status] == 'success' ? 'active' : 'inactive'
   end
 end

@@ -24,7 +24,11 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
+# require 'aasm'
+
 class Site < ApplicationRecord
+  include AASM
+
   belongs_to :user
   has_many :logs, dependent: :destroy
 
@@ -33,6 +37,20 @@ class Site < ApplicationRecord
 
   validates :url, presence: true
   validate :validate_url_format
+
+  aasm column: 'status' do
+    state :inactive, initial: true
+    state :active
+
+    # TODO: still in working
+    # event :activate do
+    #   transitions from: %i[inactive active], to: :active
+    # end
+
+    # event :inactivate do
+    #   transitions from: %i[active inactive], to: :inactive
+    # end
+  end
 
   def full_url
     [protocol, url].join
