@@ -6,6 +6,23 @@ GIT
     faker (2.18.0)
       i18n (>= 1.6, < 2)
 
+GIT
+  remote: https://github.com/kaminari/kaminari
+  revision: 7090e604e590b883d7b11ec53a627ece660b574a
+  specs:
+    kaminari (1.2.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.1)
+      kaminari-activerecord (= 1.2.1)
+      kaminari-core (= 1.2.1)
+    kaminari-actionview (1.2.1)
+      actionview
+      kaminari-core (= 1.2.1)
+    kaminari-activerecord (1.2.1)
+      activerecord
+      kaminari-core (= 1.2.1)
+    kaminari-core (1.2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -406,6 +423,7 @@ DEPENDENCIES
   faraday
   flash_rails_messages
   jbuilder (~> 2.7)
+  kaminari!
   launchy
   listen (~> 3.3)
   ordinare

@@ -32,4 +32,6 @@ class Log < ApplicationRecord
     state :failed
     state :errored
   end
+
+  paginates_per 10
 end

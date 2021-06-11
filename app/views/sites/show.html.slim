@@ -22,4 +22,6 @@
           th scope="col" = t('.response_time')
           th scope="col" = t('.response_message')
       tbody
-        = render @site.logs
+        = render @logs
+
+    = paginate @logs

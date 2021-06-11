@@ -14,6 +14,8 @@ class SitesController < ApplicationController
 
   def show
     authorize @site
+
+    @logs = @site.logs.page(params[:page])
   end
 
   def create
