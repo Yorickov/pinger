@@ -1,5 +1,5 @@
-.row
-  .col-lg-6.col-md-8.mx-auto
+.row.mb-4
+  .col
     .card.site-info
       .card-header.d-flex.justify-content-between
         h5.card-title = @site.name
@@ -11,3 +11,15 @@
       .card-footer.d-flex.justify-content-between.ping-wrapper
         = link_to t('links.ping'), ping_current_site_path(@site), remote: true, data: { type: :json }, class: 'btn btn-outline-dark ping-link'
         .mw-3.ping-box
+
+.row
+  .col
+    table.table.table-hover
+      thead
+        tr
+          th scope="col" = t('.time')
+          th scope="col" = t('.status')
+          th scope="col" = t('.response_time')
+          th scope="col" = t('.response_message')
+      tbody
+        = render @site.logs

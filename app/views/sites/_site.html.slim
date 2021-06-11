@@ -10,7 +10,7 @@ tr.position-relative
 
   td
     - if site.last_pinged_at
-      = format_time(site.last_pinged_at)
+      = format_unix_time(site.last_pinged_at)
   td
     - if site.last_pinged_at
       = site.logs.last.status

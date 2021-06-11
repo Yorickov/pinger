@@ -1,0 +1,9 @@
+tr
+  td
+    = format_utc_time(log.created_at)
+  td
+    = log.status
+  td
+    = log.response_time
+  td
+    = truncate(log.response_message)
