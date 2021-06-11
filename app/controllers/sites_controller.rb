@@ -15,7 +15,7 @@ class SitesController < ApplicationController
   def show
     authorize @site
 
-    @logs = @site.logs.page(params[:page])
+    @logs = @site.logs.order(created_at: :desc).page(params[:page])
   end
 
   def create

@@ -32,7 +32,7 @@ class Site < ApplicationRecord
   SECONDS_IN_MINUTE = 60
 
   belongs_to :user
-  has_many :logs, -> { order(created_at: :desc) }, dependent: :destroy
+  has_many :logs, dependent: :destroy
 
   validates :name, :interval, presence: true
   validates :protocol, presence: true, inclusion: { in: %w[http:// https://] }
