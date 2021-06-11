@@ -3,7 +3,7 @@
 require 'faraday'
 
 class HttpClient
-  DEFAULT_REQUEST_OPTIONS = { timeout: 10 }
+  DEFAULT_REQUEST_OPTIONS = { timeout: 10 }.freeze
 
   def self.call(*args)
     new(*args).call
