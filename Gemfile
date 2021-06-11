@@ -18,7 +18,6 @@ gem 'rails-i18n', '~> 6.0.0'
 gem 'redis-rails'
 gem 'sass-rails', '>= 6'
 gem 'sidekiq'
-gem 'sinatra', require: false
 gem 'slim-rails'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 5.0'
@@ -51,6 +50,7 @@ group :test do
   gem 'pundit-matchers', '~> 1.6.0'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
+  gem 'simplecov', require: false
   gem 'timecop'
   gem 'webdrivers'
   gem 'webmock'

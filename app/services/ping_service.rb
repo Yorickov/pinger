@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-# TODO: remove without additional functions
+# TODO: remove without additional functions ?
 module PingService
   module_function
 
   def call(url)
-    Clients::HttpRequest.call(url)
+    HttpClient.call(url)
   end
 end

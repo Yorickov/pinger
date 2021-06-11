@@ -28,15 +28,13 @@ FactoryBot.define do
   factory :site do
     name { Faker::Name.name }
     url { 'github.com' }
-
     protocol { 'http://' }
     interval { 1 }
 
     user
 
-    # TODO: change
     trait :invalid do
-      url { nil }
+      name { nil }
     end
   end
 end

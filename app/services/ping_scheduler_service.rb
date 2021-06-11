@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module SchedulerPingService
+module PingSchedulerService
   class << self
     def call
       Site.find_in_batches do |batch|

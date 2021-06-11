@@ -6,7 +6,8 @@ export default (event) => {
 
   event.preventDefault();
 
-  const { status } = detail[0];
+  const [data, _status, _xhr] = detail;
+  const { status, response_time } = data;
   const pingBoxNode = document.querySelector('.ping-wrapper .ping-box');
   if (pingBoxNode.children.length > 0) {
     pingBoxNode.innerHTML = '';
@@ -17,7 +18,7 @@ export default (event) => {
   const optClass = status == 'errored' ? 'text-danger' : 'text-success';
   pingInfoNode.classList.add(...baseClasses, optClass);
 
-  const optContent = status === 'errored' ? '' : ` Response time: ${detail[0].response_time}`;
+  const optContent = status === 'errored' ? '' : ` Response time: ${response_time}`;
   const content = `Status: ${status}.${optContent}`;
   pingInfoNode.textContent = content;
 

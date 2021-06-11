@@ -4,6 +4,6 @@ class PingSitesJob < ApplicationJob
   queue_as :default
 
   def perform
-    SchedulerPingService.call
+    PingSchedulerService.call
   end
 end

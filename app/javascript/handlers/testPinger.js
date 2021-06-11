@@ -7,9 +7,9 @@ const beforeHandler = (event) => {
     return;
   }
 
-  // TODO: precise selectors
-  const protocol = document.getElementById('site_protocol');
-  const url = document.getElementById('site_url');
+  // TODO: Correct selectors?
+  const protocol = document.querySelector('.site-form #site_protocol');
+  const url = document.querySelector('.site-form #site_url');
 
   const preparedUrl = `${protocol.value}${url.value}`;
   target.dataset.params = `url=${preparedUrl}`;

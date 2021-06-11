@@ -25,7 +25,7 @@ class PingSiteService
   end
 
   def make_ping
-    Clients::HttpRequest.call(site.full_url)
+    HttpClient.call(site.full_url)
   end
 
   def save_result(response)

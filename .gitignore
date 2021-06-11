@@ -67,6 +67,7 @@ build-iPhoneSimulator/
 .rubocop.yml
 Makefile
 .solargraph.yml
+coverage
 
 /public/packs
 /public/packs-test

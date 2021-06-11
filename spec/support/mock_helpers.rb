@@ -17,7 +17,7 @@ module MockHelpers
   end
 
   def mock_ping_http_client(site, response)
-    allow(Clients::HttpRequest)
+    allow(HttpClient)
       .to receive(:call)
       .with(site.full_url)
       .and_return(response)

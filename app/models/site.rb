@@ -29,6 +29,8 @@
 class Site < ApplicationRecord
   include AASM
 
+  SECONDS_IN_MINUTE = 60
+
   belongs_to :user
   has_many :logs, dependent: :destroy
 
@@ -63,7 +65,7 @@ class Site < ApplicationRecord
   private
 
   def minutes_from_last_ping
-    (Time.now.utc.to_i - (last_pinged_at || created_at.to_i)) / 60
+    (Time.now.utc.to_i - (last_pinged_at || created_at.to_i)) / SECONDS_IN_MINUTE
   end
 
   def validate_url_format
