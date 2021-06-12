@@ -81,3 +81,7 @@ yarn-debug.log*
 *.sublime-workspace
 
 *.sqlite3
+
+# blocked by github tests
+spec/features/sites/ping_new_spec.rb
+spec/features/sites/ping_show_spec.rb

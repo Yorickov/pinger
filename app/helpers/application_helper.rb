@@ -6,10 +6,10 @@ module ApplicationHelper
   end
 
   def format_utc_time(time)
-    time.strftime('%d-%m-%Y %H:%M')
+    time.strftime('%d-%m-%Y %H:%M').in_time_zone
   end
 
-  def truncate(text, length = 20)
+  def truncate(text, length = 30)
     text.truncate(length)
   end
 end
