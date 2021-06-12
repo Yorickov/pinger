@@ -1,13 +1,13 @@
 = form_with model: site, local: true do |f|
   .mb-3
-    = f.label :name, t('activerecord.attributes.site.name'), class: "form-label"
-    = f.text_field :name, class: "form-control"
+    = f.label :name, t('activerecord.attributes.site.name'), class: 'form-label'
+    = f.text_field :name, class: 'form-control'
     - site.errors.full_messages_for(:name).each do |message|
       .text-danger = message
 
   .mb-3
-    = f.label :url, t('activerecord.attributes.site.url'), class: "form-label"
-    = f.text_field :url, class: "form-control"
+    = f.label :url, t('activerecord.attributes.site.url'), class: 'form-label'
+    = f.text_field :url, class: 'form-control'
     - site.errors.full_messages_for(:url).each do |message|
       .text-danger = message
 
