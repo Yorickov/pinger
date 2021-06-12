@@ -1,0 +1,19 @@
+.row
+  .col-lg-6.col-md-8.mx-auto
+    h2= t('.sign_up')
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = render 'devise/shared/error_messages', resource: resource
+      .form-group.mb-3
+        = f.label :email, class: 'form-label'
+        = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control'
+      .form-group.mb-3
+        = f.label :password, class: 'form-label'
+        = f.password_field :password, autocomplete: 'new-password', class: 'form-control'
+        - if @minimum_password_length
+          small.form-text.text-muted= t('devise.shared.minimum_password_length', count: @minimum_password_length)
+      .form-group.mb-3
+        = f.label :password_confirmation, class: 'form-label'
+        = f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control'
+      .actions.mb-3
+        = f.submit t('.sign_up'), class: 'btn btn-primary'
+    = render 'devise/shared/links'

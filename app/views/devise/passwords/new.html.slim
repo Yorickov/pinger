@@ -1,0 +1,11 @@
+.row
+  .col-lg-6.col-md-8.mx-auto
+    h2= t('.forgot_your_password')
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      = render 'devise/shared/error_messages', resource: resource
+      .form-group.mb-3
+        = f.label :email, class: 'form-label'
+        = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control'
+      .actions.mb-3
+        = f.submit t('.send_me_reset_password_instructions'), class: 'btn btn-primary'
+    = render 'devise/shared/links'
