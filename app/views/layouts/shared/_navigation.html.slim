@@ -2,8 +2,8 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
   .container-fluid
     .navbar-nav
       - if user_signed_in?
-        a.nav-link href=sites_path = t 'label.all_sites'
-        a.nav-link href=new_site_path = t 'label.add_site'
+        a.nav-link href=sites_path = t('label.all_sites')
+        a.nav-link href=new_site_path = t('label.add_site')
       a.nav-link href='/en' En
       a.nav-link href='/ru' Ru
     ul.navbar-nav
