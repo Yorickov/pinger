@@ -23,28 +23,30 @@ class HttpClient
   attr_reader :options, :connection
 
   def setup_connection(url)
-    Faraday::Connection.new(url, request: options)
+    Faraday.new(url, request: options) do |f|
+      f.response :logger, nil, { headers: false }
+    end
   end
 
   def make_request
-    start = Time.now.utc
+    start_time = Time.now.utc
 
     begin
       res = connection.get
+      end_time = Time.now.utc
       {
         status: res.status >= 400 ? 'failed' : 'success',
         response_message: res.reason_phrase,
-        response_time: calc_response_time(start)
+        response_time: calc_response_time(start_time, end_time)
       }
-    # TODO: add special handling?
-    # rescue Faraday::TimeoutError => _e
-    #   { status: 'timeout errored' }
+    rescue Faraday::TimeoutError => e
+      { status: 'timeout_error', response_message: e.message }
     rescue StandardError => e
       { status: 'errored', response_message: e.message }
     end
   end
 
-  def calc_response_time(start_time)
-    (Time.now.utc - start_time).in_milliseconds.to_i
+  def calc_response_time(start_time, end_time)
+    (end_time - start_time).in_milliseconds.to_i
   end
 end

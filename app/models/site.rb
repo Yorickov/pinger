@@ -23,8 +23,6 @@
 # Foreign Keys
 #
 #  fk_rails_...  (user_id => users.id)
-#
-# require 'aasm'
 
 class Site < ApplicationRecord
   include AASM

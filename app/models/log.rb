@@ -31,6 +31,7 @@ class Log < ApplicationRecord
     state :success
     state :failed
     state :errored
+    state :timeout_error
   end
 
   paginates_per 10
