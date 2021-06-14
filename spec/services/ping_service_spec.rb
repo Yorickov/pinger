@@ -3,8 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe PingService do
-  let(:user) { create(:user_with_sites) }
-  let(:site) { user.sites.first }
+  let(:site) { build(:site) }
 
   after { described_class.call(site.full_url) }
 
