@@ -1,0 +1,25 @@
+.row.mb-3
+  .col.bg-light.border.border-1.rounded-3.p-3
+    = search_form_for @q, class: 'row gx-2 gy-3 align-items-center' do |f|
+      .col-auto
+        = f.label :status_eq, t('sites.index.status'), class: 'form-label'
+      .col-auto
+        = f.select :status_eq, Site.aasm.states, { include_blank: t('form.all') }, class: 'form-select'
+
+      .col-auto
+        = f.label :protocol_eq, t('sites.index.protocol'), class: 'form-label'
+      .col-auto
+        = f.select :protocol_eq, %w[http:// https://], { include_blank: t('form.all') }, class: 'form-select'
+
+      .col-auto
+        = f.label :logs_status_in, t('sites.index.last_pinged_result'), class: 'form-label'
+      .col-auto
+        = f.select :logs_status_in, Log.aasm.states, { include_blank: t('form.all') }, class: 'form-select', multiple: true, size: "2"
+
+      .col-auto
+        = f.label :url_cont, t('sites.index.url'), class: 'form-label'
+      .col-auto
+        = f.search_field :url_cont, class: 'form-control'
+
+      .col-auto
+        = f.submit class: 'btn btn-sm btn-dark'

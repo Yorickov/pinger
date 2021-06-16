@@ -1,0 +1,19 @@
+/ TODO: should refactor later
+table.table.table-borderless
+  thead
+    tr
+      th scope="col" = t('.status')
+      th scope="col" = t('.url')
+      th scope="col" = t('.interval')
+      th scope="col" = t('.timeout')
+      th scope="col" = t('.checking_string')
+      th scope="col" = t('.created_at')
+  tbody
+    tr
+      td = @site.status
+      td = @site.full_url
+      td = @site.interval
+      td = @site.timeout
+      td = @site.checking_string
+      td = format_unix_time(@site.created_at)
+

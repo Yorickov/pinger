@@ -5,7 +5,8 @@ class SitesController < ApplicationController
   before_action :load_site, only: %i[show edit update destroy ping_current]
 
   def index
-    @sites = current_user.sites
+    @q = current_user.sites.includes(:logs).ransack(params[:q])
+    @sites = @q.result(distinct: true)
   end
 
   def new
@@ -15,7 +16,8 @@ class SitesController < ApplicationController
   def show
     authorize @site
 
-    @logs = @site.logs.order(created_at: :desc).page(params[:page])
+    @q = @site.logs.ransack(params[:q])
+    @logs = @q.result(distinct: true).order(created_at: :desc).page(params[:page])
   end
 
   def create

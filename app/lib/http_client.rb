@@ -39,7 +39,7 @@ class HttpClient
         status = res.status >= 400 ? 'failed' : 'success'
         build_response(status, res.reason_phrase, calc_response_time(start_time, end_time))
       else
-        build_response('content_missing', "<#{options[:checking_string]}> missing")
+        build_response('content_missing', "<#{options[:checking_string]}> doesn't present")
       end
     rescue Faraday::TimeoutError => e
       build_response('timeout_error', e.message)

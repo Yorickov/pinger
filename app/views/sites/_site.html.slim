@@ -2,9 +2,11 @@ tr.position-relative
   td
     = site.status
   td
-    = link_to site.name, site, class: 'stretched-link text-decoration-none text-dark fw-bold'
+    = link_to site.name, site, class: 'stretched-link text-decoration-none text-dark'
   td
-    = site.full_url
+    = site.protocol
+  td
+    = site.url
   td
     = site.interval
 

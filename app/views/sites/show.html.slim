@@ -7,20 +7,26 @@
           = link_to t('links.edit'), edit_site_path(@site), class: 'btn btn-sm btn-primary me-3'
           = link_to t('links.delete'), @site, method: :delete, data: { confirm: t('links.confirm') }, class: 'btn btn-sm btn-danger'
       .card-body
-        .card-text.mb-3 = @site.full_url
+        = render 'site_body'
+
       .card-footer.d-flex.justify-content-between.ping-wrapper
         = link_to t('links.ping'), ping_current_site_path(@site), remote: true, data: { type: :json }, class: 'btn btn-outline-dark ping-link'
         .mw-3.ping-box
+
+= render 'logs/search_form'
 
 .row
   .col
     table.table.table-hover
       thead
         tr
-          th scope="col" = t('.time')
+          th scope="col"
+            = sort_link(@q, :created_at, t('.time'), default_order: :desc)
           th scope="col" = t('.status')
-          th scope="col" = t('.response_time')
-          th scope="col" = t('.response_message')
+          th scope="col"
+            = sort_link(@q, :response_time, t('.response_time'))
+          th scope="col"
+            = sort_link(@q, :response_message, t('.response_message'))
       tbody
         = render @logs
 

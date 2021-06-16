@@ -29,6 +29,7 @@ ru:
   form:
     in_seconds: В секундах
     in_minutes: В минутах
+    all: Все
 
   label:
     add_site: Добавить новый сайт
@@ -57,7 +58,8 @@ ru:
   sites:
     index:
       name: Название сайта
-      url: Адрес сайта
+      protocol: Протокол
+      url: Адрес
       status: Статус
       interval: Интервал
       last_pinged_at: Последний пинг
@@ -69,3 +71,15 @@ ru:
       add_site: Добавить сайт для мониторинга
     edit:
       edit_site: Редактировать сайт
+    show:
+      time: Время
+      status: Статус
+      response_time: Время отклика
+      response_message: Сообщение ответа
+    site_body:
+      status: Статус
+      url: URL
+      interval: Интервал
+      timeout: Тайм-аут
+      checking_string: Строка проверки
+      created_at: Добавлен

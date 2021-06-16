@@ -15,7 +15,7 @@ require 'pundit/matchers'
 require 'webmock/rspec'
 require 'timecop'
 
-WebMock.disable_net_connect!(allow_localhost: true)
+WebMock.disable_net_connect!({ allow_localhost: true, allow: 'chromedriver.storage.googleapis.com' })
 # WebMock.allow_net_connect!(net_http_connect_on_start: true)
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

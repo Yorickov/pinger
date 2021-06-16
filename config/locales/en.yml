@@ -29,6 +29,7 @@ en:
   form:
     in_seconds: In seconds
     in_minutes: In minutes
+    all: All
 
   label:
     add_site: Add new site
@@ -58,7 +59,8 @@ en:
   sites:
     index:
       name: Site name
-      url: Site URL
+      protocol: Protocol
+      url: URL
       status: Status
       interval: Interval
       last_pinged_at: Last ping
@@ -70,3 +72,15 @@ en:
       add_site: Add site for monitoring
     edit:
       edit_site: Edit site
+    show:
+      time: Time
+      status: Status
+      response_time: Response time
+      response_message: Response message
+    site_body:
+      status: Status
+      url: URL
+      interval: Interval
+      timeout: Timeout
+      checking_string: Checking string
+      created_at: Added

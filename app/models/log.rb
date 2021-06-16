@@ -30,8 +30,8 @@ class Log < ApplicationRecord
   aasm column: 'status' do
     state :success
     state :failed
-    state :errored
     state :timeout_error
+    state :errored
     state :content_missing
   end
 
