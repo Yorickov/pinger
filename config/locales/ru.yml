@@ -8,6 +8,8 @@ ru:
         name: Название
         protocol: Протокол
         interval: Интервал
+        timeout: Тайм-аут
+        checking_string: Ответ должен содержать
 
   helpers:
     submit:
@@ -23,6 +25,10 @@ ru:
   app:
     name: Пингер
     short_description: Простой сервис, который проверяет избранные сайты и сообщает, если они становятся недоступны.
+
+  form:
+    in_seconds: В секундах
+    in_minutes: В минутах
 
   label:
     add_site: Добавить новый сайт

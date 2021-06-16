@@ -4,17 +4,19 @@
 #
 # Table name: sites
 #
-#  id             :bigint           not null, primary key
-#  enabled        :boolean          default(TRUE)
-#  interval       :integer          not null
-#  last_pinged_at :integer
-#  name           :string           not null
-#  protocol       :string           not null
-#  status         :string           default("inactive")
-#  url            :string           not null
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  user_id        :bigint
+#  id              :bigint           not null, primary key
+#  checking_string :string
+#  enabled         :boolean          default(TRUE)
+#  interval        :integer          not null
+#  last_pinged_at  :integer
+#  name            :string           not null
+#  protocol        :string           not null
+#  status          :string           default("inactive")
+#  timeout         :integer          default(10)
+#  url             :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  user_id         :bigint
 #
 # Indexes
 #
@@ -30,6 +32,8 @@ FactoryBot.define do
     url { 'github.com' }
     protocol { 'http://' }
     interval { 1 }
+    checking_string { nil }
+    timeout { 10 }
 
     user
 

@@ -32,6 +32,7 @@ class Log < ApplicationRecord
     state :failed
     state :errored
     state :timeout_error
+    state :content_missing
   end
 
   paginates_per 10

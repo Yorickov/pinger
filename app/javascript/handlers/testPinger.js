@@ -1,3 +1,4 @@
+import queryString from 'query-string';
 import handler from './utilites/handler';
 import errorHandler from './utilites/errorHandler';
 
@@ -7,12 +8,13 @@ const beforeHandler = (event) => {
     return;
   }
 
-  // TODO: Correct selectors?
   const protocol = document.querySelector('.site-form #site_protocol');
   const url = document.querySelector('.site-form #site_url');
+  const timeout = document.querySelector('.site-form #site_timeout');
+  const checkingString = document.querySelector('.site-form #site_checking_string');
 
-  const preparedUrl = `${protocol.value}${url.value}`;
-  target.dataset.params = `url=${preparedUrl}`;
+  const queryParams = { url: `${protocol.value}${url.value}`, timeout: timeout.value, checking_string: checkingString.value }
+  target.dataset.params = queryString.stringify(queryParams);
 };
 
 export default () => {

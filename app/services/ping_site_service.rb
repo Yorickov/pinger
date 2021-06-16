@@ -25,7 +25,13 @@ class PingSiteService
   end
 
   def make_ping
-    HttpClient.call(site.full_url)
+    HttpClient.call(site.full_url, ping_options)
+  end
+
+  def ping_options
+    options = { timeout: site.timeout }
+    options[:checking_string] = site.checking_string if site.checking_string.present?
+    options
   end
 
   def save_result(response)

@@ -5,22 +5,45 @@ require 'rails_helper'
 RSpec.describe PingSiteService do
   subject(:service_called) { described_class.call(site) }
 
-  let(:site) { create(:site, user: create(:user)) }
+  let(:site) { create(:site) }
   let(:response) { { status: 'success', response_message: 'OK', response_time: 100 } }
-  let(:time) { Time.now.utc }
+  let(:checking_string) { 'string' }
 
-  before { mock_ping_http_client(site, response) }
+  describe 'Called service calls http-request client to ping site' do
+    before { stub_valid_request(site.full_url, 200) }
 
-  before { Timecop.freeze(time) }
-  after { Timecop.return }
+    context 'without checking string' do
+      it 'calls Http Client' do
+        expect(HttpClient)
+          .to receive(:call)
+          .with(site.full_url, { timeout: site.timeout })
+          .and_call_original
 
-  describe 'Service called with any site' do
-    it 'creates log' do
-      expect { service_called }.to change(Log, :count).by(1)
+        service_called
+      end
+    end
+
+    context 'with check string' do
+      it 'calls Http Client' do
+        site.checking_string = checking_string
+
+        expect(HttpClient)
+          .to receive(:call)
+          .with(site.full_url, { timeout: site.timeout, checking_string: site.checking_string })
+          .and_call_original
+
+        service_called
+      end
     end
   end
 
-  describe 'Service called' do
+  describe 'Called service creates log and changes site attributes' do
+    before { mock_http_client(site.full_url, response, { timeout: 10 }) }
+
+    it 'creates log' do
+      expect { service_called }.to change(Log, :count).by(1)
+    end
+
     context 'when site pinged with code 100-300' do
       it 'creates log with success status and sets site status active' do
         service_called
@@ -29,8 +52,7 @@ RSpec.describe PingSiteService do
       end
 
       it 'sets status active' do
-        expect { service_called }
-          .to change(site, :status).to('active')
+        expect { service_called }.to change(site, :status).to('active')
       end
     end
 
@@ -44,8 +66,23 @@ RSpec.describe PingSiteService do
       end
 
       it 'remain status inactive' do
-        expect { service_called }
-          .not_to change(site, :status)
+        expect { service_called }.not_to change(site, :status)
+      end
+    end
+
+    context 'when checking content missing' do
+      let(:response) do
+        { status: 'content_missing', response_message: 'Checking content: <string> missing' }
+      end
+
+      it 'creates log with failed status' do
+        service_called
+
+        expect(site.logs.last).to have_attributes(**response)
+      end
+
+      it 'remain status inactive' do
+        expect { service_called }.not_to change(site, :status)
       end
     end
 
@@ -59,8 +96,7 @@ RSpec.describe PingSiteService do
       end
 
       it 'remain status inactive' do
-        expect { service_called }
-          .not_to change(site, :status)
+        expect { service_called }.not_to change(site, :status)
       end
     end
   end

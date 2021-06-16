@@ -4,7 +4,7 @@
 module PingService
   module_function
 
-  def call(url)
-    HttpClient.call(url)
+  def call(url, options = {})
+    HttpClient.call(url, options)
   end
 end

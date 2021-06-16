@@ -8,6 +8,8 @@ en:
         name: Name
         protocol: Protocol
         interval: Interval
+        timeout: Timeout
+        checking_string: Response should contain
 
   helpers:
     submit:
@@ -25,8 +27,8 @@ en:
     short_description: A simple service that checks your favorite sites periodically and alerts you when they go down.
 
   form:
-    add_site: Add site for monitoring
-    edit_site: Edit site
+    in_seconds: In seconds
+    in_minutes: In minutes
 
   label:
     add_site: Add new site
@@ -64,3 +66,7 @@ en:
       edit: Edit
       delete: Delete
       settings: Settings
+    new:
+      add_site: Add site for monitoring
+    edit:
+      edit_site: Edit site

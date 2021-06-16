@@ -4,17 +4,19 @@
 #
 # Table name: sites
 #
-#  id             :bigint           not null, primary key
-#  enabled        :boolean          default(TRUE)
-#  interval       :integer          not null
-#  last_pinged_at :integer
-#  name           :string           not null
-#  protocol       :string           not null
-#  status         :string           default("inactive")
-#  url            :string           not null
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  user_id        :bigint
+#  id              :bigint           not null, primary key
+#  checking_string :string
+#  enabled         :boolean          default(TRUE)
+#  interval        :integer          not null
+#  last_pinged_at  :integer
+#  name            :string           not null
+#  protocol        :string           not null
+#  status          :string           default("inactive")
+#  timeout         :integer          default(10)
+#  url             :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  user_id         :bigint
 #
 # Indexes
 #
@@ -36,6 +38,8 @@ RSpec.describe Site, type: :model do
     it { should validate_presence_of(:interval) }
     it { should validate_presence_of(:protocol) }
     it { should validate_inclusion_of(:protocol).in_array(%w[http:// https://]) }
+    it { should validate_numericality_of(:interval).only_integer }
+    it { should validate_numericality_of(:timeout).only_integer }
 
     describe 'Url' do
       it 'creates site with correct url format' do
