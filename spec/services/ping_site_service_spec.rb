@@ -7,7 +7,7 @@ RSpec.describe PingSiteService do
 
   let(:site) { create(:site) }
   let(:response) { { status: 'success', response_message: 'OK', response_time: 100 } }
-  let(:checking_string) { 'string' }
+  let(:checking_string) { Faker::String.random }
 
   describe 'Called service calls http-request client to ping site' do
     before { stub_valid_request(site.full_url, 200) }
@@ -16,7 +16,7 @@ RSpec.describe PingSiteService do
       it 'calls Http Client' do
         expect(HttpClient)
           .to receive(:call)
-          .with(site.full_url, { timeout: site.timeout })
+          .with(site.full_url, { timeout: site.timeout, checking_string: nil })
           .and_call_original
 
         service_called
@@ -38,7 +38,7 @@ RSpec.describe PingSiteService do
   end
 
   describe 'Called service creates log and changes site attributes' do
-    before { mock_http_client(site.full_url, response, { timeout: 10 }) }
+    before { mock_http_client(site.full_url, response, { timeout: 10, checking_string: site.checking_string }) }
 
     it 'creates log' do
       expect { service_called }.to change(Log, :count).by(1)

@@ -17,7 +17,7 @@ export default (event) => {
 
   const pingInfoNode = document.createElement('div');
   const baseClasses = ['mb-3', 'card-text'];
-  const optClass = status == 'success' ? 'text-success' : 'text-danger';
+  const optClass = status === 'success' ? 'text-success' : 'text-danger';
   pingInfoNode.classList.add(...baseClasses, optClass);
 
   const optContent = status === 'success' ? `. Response time: ${response_time}` : '';

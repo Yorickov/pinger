@@ -2,7 +2,7 @@
   .col-12.mb-3
     = link_to t('form.filter'), '#filter_form', data: { 'bs-toggle': 'collapse' }, role: 'button', class: 'btn btn-sm btn-secondary', aria: { expanded: 'false', controls: 'filter_form' }
   .col.collapse#filter_form
-    = search_form_for @q, url: site_path(@site), class: 'row gx-2 gy-3 align-items-center' do |f|
+    = search_form_for @query, url: site_path(@site), class: 'row gx-2 gy-3 align-items-center' do |f|
       .col-auto
         = f.label :status_eq, t('sites.show.status'), class: 'form-label'
       .col-sm-2

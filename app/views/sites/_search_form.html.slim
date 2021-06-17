@@ -1,6 +1,6 @@
 .row.mb-3
   .col.bg-light.border.border-1.rounded-3.p-3
-    = search_form_for @q, class: 'row gx-2 gy-3 align-items-center' do |f|
+    = search_form_for @query, class: 'row gx-2 gy-3 align-items-center' do |f|
       .col-auto
         = f.label :status_eq, t('sites.index.status'), class: 'form-label'
       .col-auto

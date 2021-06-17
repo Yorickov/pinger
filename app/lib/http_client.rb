@@ -3,7 +3,15 @@
 require 'faraday'
 
 class HttpClient
-  DEFAULT_OPTIONS = { timeout: 10 }.freeze
+  DEFAULT_OPTIONS = { timeout: 10, checking_string: nil }.freeze
+
+  STATUSES = {
+    success: 'success',
+    failed: 'failed',
+    timeout_error: 'timeout_error',
+    errored: 'errored',
+    content_missing: 'content_missing'
+  }.freeze
 
   def self.call(*args)
     new(*args).call
@@ -36,15 +44,15 @@ class HttpClient
       end_time = Time.now.utc
 
       if content_check?(res.body)
-        status = res.status >= 400 ? 'failed' : 'success'
+        status = res.status >= 400 ? STATUSES[:failed] : STATUSES[:success]
         build_response(status, res.reason_phrase, calc_response_time(start_time, end_time))
       else
-        build_response('content_missing', "<#{options[:checking_string]}> doesn't present")
+        build_response(STATUSES[:content_missing], "<#{options[:checking_string]}> doesn't present")
       end
     rescue Faraday::TimeoutError => e
-      build_response('timeout_error', e.message)
+      build_response(STATUSES[:timeout_error], e.message)
     rescue StandardError => e
-      build_response('errored', e.message)
+      build_response(STATUSES[:errored], e.message)
     end
   end
 
@@ -53,12 +61,11 @@ class HttpClient
   end
 
   def content_check?(content)
-    return true unless options.key?(:checking_string)
-
-    content.include?(options[:checking_string])
+    options[:checking_string].blank? || content.include?(options[:checking_string])
   end
 
   def build_response(status, response_message, response_time = nil)
+    # { status: status, response_message: response_message, response_time: response_time }
     response = { status: status, response_message: response_message }
     response[:response_time] = response_time if response_time
     response

@@ -9,14 +9,16 @@ RSpec.describe HttpClient do
   let(:options) { {} }
   let(:code_success) { 200 }
   let(:code_failed) { 500 }
-  let(:response_body) { 'some string' }
+  let(:checking_string) { Faker::String.random }
+  let(:random_string) { Faker::String.random }
+  let(:response_body) { "#{checking_string} #{Faker::String.random}" }
 
   describe 'Service called' do
     context 'with response 100-300' do
       before { stub_valid_request(url, code_success) }
 
       it 'returns success status' do
-        expect(service_called).to include(status: 'success')
+        expect(service_called).to include(status: described_class::STATUSES[:success])
       end
     end
 
@@ -29,22 +31,22 @@ RSpec.describe HttpClient do
     end
 
     context 'when checking content found' do
-      let(:options) { { checking_string: 'string' } }
+      let(:options) { { checking_string: checking_string } }
 
       before { stub_valid_request(url, code_success, response_body) }
 
       it 'returns success status' do
-        expect(service_called).to include(status: 'success')
+        expect(service_called).to include(status: described_class::STATUSES[:success])
       end
     end
 
     context 'when checking content missing' do
-      let(:options) { { checking_string: 'wrong' } }
+      let(:options) { { checking_string: random_string } }
 
       before { stub_valid_request(url, code_success, response_body) }
 
       it 'returns success status' do
-        expect(service_called).to include(status: 'content_missing')
+        expect(service_called).to include(status: described_class::STATUSES[:content_missing])
       end
     end
 
@@ -55,7 +57,7 @@ RSpec.describe HttpClient do
         let(:error_type) { Faraday::TimeoutError }
 
         it 'returns timeout error status' do
-          expect(service_called).to include(status: 'timeout_error', response_message: 'Exception from WebMock')
+          expect(service_called).to include(status: described_class::STATUSES[:timeout_error], response_message: 'Exception from WebMock')
         end
       end
 
@@ -63,7 +65,7 @@ RSpec.describe HttpClient do
         let(:error_type) { StandardError }
 
         it 'returns errored status' do
-          expect(service_called).to include(status: 'errored', response_message: 'Exception from WebMock')
+          expect(service_called).to include(status: described_class::STATUSES[:errored], response_message: 'Exception from WebMock')
         end
       end
     end

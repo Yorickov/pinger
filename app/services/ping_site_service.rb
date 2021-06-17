@@ -29,9 +29,7 @@ class PingSiteService
   end
 
   def ping_options
-    options = { timeout: site.timeout }
-    options[:checking_string] = site.checking_string if site.checking_string.present?
-    options
+    { timeout: site.timeout, checking_string: site.checking_string }
   end
 
   def save_result(response)

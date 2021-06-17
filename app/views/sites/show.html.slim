@@ -21,12 +21,12 @@
       thead
         tr
           th scope="col"
-            = sort_link(@q, :created_at, t('.time'), default_order: :desc)
+            = sort_link(@query, :created_at, t('.time'), default_order: :desc)
           th scope="col" = t('.status')
           th scope="col"
-            = sort_link(@q, :response_time, t('.response_time'))
+            = sort_link(@query, :response_time, t('.response_time'))
           th scope="col"
-            = sort_link(@q, :response_message, t('.response_message'))
+            = sort_link(@query, :response_message, t('.response_message'))
       tbody
         = render @logs
 

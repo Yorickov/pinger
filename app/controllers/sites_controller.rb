@@ -5,8 +5,8 @@ class SitesController < ApplicationController
   before_action :load_site, only: %i[show edit update destroy ping_current]
 
   def index
-    @q = current_user.sites.includes(:logs).ransack(params[:q])
-    @sites = @q.result(distinct: true)
+    @query = current_user.sites.includes(:logs).ransack(params[:q])
+    @sites = @query.result(distinct: true)
   end
 
   def new
@@ -16,8 +16,8 @@ class SitesController < ApplicationController
   def show
     authorize @site
 
-    @q = @site.logs.ransack(params[:q])
-    @logs = @q.result(distinct: true).order(created_at: :desc).page(params[:page])
+    @query = @site.logs.ransack(params[:q])
+    @logs = @query.result(distinct: true).order(created_at: :desc).page(params[:page])
   end
 
   def create
@@ -55,18 +55,26 @@ class SitesController < ApplicationController
   def ping_current
     authorize @site
 
-    render_ping_info_in_json(@site.full_url, @site.attributes.slice('timeout', 'checking_string').compact)
+    render_ping_info_in_json(@site.full_url, ping_attrubutes)
   end
 
   def ping_new
     logger.info "Receiving url: #{params[:url]} timeout: #{params[:timeout]} checking: #{params[:checking_string]}"
-    render_ping_info_in_json(params[:url], params.permit(:timeout, :checking_string).compact_blank.as_json)
+    render_ping_info_in_json(params[:url], ping_params)
   end
 
   private
 
   def site_params
     params.require(:site).permit(:name, :url, :interval, :protocol, :timeout, :checking_string)
+  end
+
+  def ping_params
+    params.permit(:timeout, :checking_string).compact_blank.as_json
+  end
+
+  def ping_attrubutes
+    @site.attributes.slice('timeout', 'checking_string')
   end
 
   def load_site
