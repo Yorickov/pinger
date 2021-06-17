@@ -12,6 +12,7 @@ RSpec.describe HttpClient do
   let(:checking_string) { Faker::String.random }
   let(:random_string) { Faker::String.random }
   let(:response_body) { "#{checking_string} #{Faker::String.random}" }
+  let(:exception_message) { 'Exception from WebMock' }
 
   describe 'Service called' do
     context 'with response 100-300' do
@@ -57,7 +58,8 @@ RSpec.describe HttpClient do
         let(:error_type) { Faraday::TimeoutError }
 
         it 'returns timeout error status' do
-          expect(service_called).to include(status: described_class::STATUSES[:timeout_error], response_message: 'Exception from WebMock')
+          expect(service_called)
+            .to include(status: described_class::STATUSES[:timeout_error], response_message: exception_message)
         end
       end
 
@@ -65,7 +67,8 @@ RSpec.describe HttpClient do
         let(:error_type) { StandardError }
 
         it 'returns errored status' do
-          expect(service_called).to include(status: described_class::STATUSES[:errored], response_message: 'Exception from WebMock')
+          expect(service_called)
+            .to include(status: described_class::STATUSES[:errored], response_message: exception_message)
         end
       end
     end
