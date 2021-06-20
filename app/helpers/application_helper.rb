@@ -21,7 +21,7 @@ module ApplicationHelper
                   else
                     ["#{value} #{I18n.t('helpers.ms')}", 'fw-bold fst-italic']
                   end
-    content_tag(:span, text, class: klass)
+    tag.span(text, class: klass)
   end
 
   def ping_ability(site)
@@ -30,6 +30,6 @@ module ApplicationHelper
 
   def format_status(site)
     klass = site.enabled? ? 'text-success' : 'text-danger'
-    content_tag(:span, site.status, class: klass)
+    tag.span(site.status, class: klass)
   end
 end

@@ -6,7 +6,7 @@ RSpec.describe ChartService do
   let(:site) { create(:site) }
 
   let(:time1) { Time.local(2021, 6, 12, 15, 12, 16, 50) }
-  let(:time2) { time1 + 15.minute }
+  let(:time2) { time1 + 15.minutes }
   let(:time1_expected) { time1.change(sec: 0) }
   let(:time2_expected) { time2.change(sec: 0) }
 
