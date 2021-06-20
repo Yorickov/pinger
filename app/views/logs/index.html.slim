@@ -1,0 +1,18 @@
+= render 'search_form'
+
+.row
+  .col
+    table.table.table-hover
+      thead
+        tr
+          th scope="col"
+            = sort_link @query, :created_at, {}, class: 'text-dark', default_order: :desc
+          th scope="col" = t('.status')
+          th scope="col"
+            = sort_link @query, :response_time, {}, class: 'text-dark'
+          th scope="col"
+            = sort_link @query, :response_message, {}, class: 'text-dark'
+      tbody
+        = render @logs
+
+    = paginate @logs

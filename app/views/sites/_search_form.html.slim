@@ -1,25 +1,31 @@
 .row.mb-3
-  .col.bg-light.border.border-1.rounded-3.p-3
-    = search_form_for @query, class: 'row gx-2 gy-3 align-items-center' do |f|
+  .col-12.mb-3
+    = link_to t('form.filter'), '#filter_form', data: { 'bs-toggle': 'collapse' }, role: 'button', class: 'btn btn-sm btn-outline-dark', aria: { expanded: 'false', controls: 'filter_form' }
+  .col.collapse#filter_form
+    .row.align-items-center.gx-2
       .col-auto
-        = f.label :status_eq, t('sites.index.status'), class: 'form-label'
-      .col-auto
-        = f.select :status_eq, Site.aasm.states, { include_blank: t('form.all') }, class: 'form-select'
+        = link_to t('form.clear'), {}, class: 'btn btn-sm text-light bg-dark rounded-3'
+      .col
+        = search_form_for @query, class: 'row gx-2 align-items-center' do |f|
+          .col-auto
+            = f.label :status_eq, t('sites.index.status')
+          .col-auto
+            = f.select :status_eq, Site.aasm.states, { include_blank: t('form.all') }, class: 'form-select'
 
-      .col-auto
-        = f.label :protocol_eq, t('sites.index.protocol'), class: 'form-label'
-      .col-auto
-        = f.select :protocol_eq, %w[http:// https://], { include_blank: t('form.all') }, class: 'form-select'
+          .col-auto
+            = f.label :protocol_eq, t('sites.index.protocol')
+          .col-auto
+            = f.select :protocol_eq, %w[http:// https://], { include_blank: t('form.all') }, class: 'form-select'
 
-      .col-auto
-        = f.label :logs_status_in, t('sites.index.last_pinged_result'), class: 'form-label'
-      .col-auto
-        = f.select :logs_status_in, Log.aasm.states, { include_blank: t('form.all') }, class: 'form-select', multiple: true, size: "2"
+          .col-auto
+            = f.label :logs_status_in, t('sites.index.last_pinged_result')
+          .col-auto
+            = f.select :logs_status_in, Log.aasm.states, { include_blank: t('form.all') }, class: 'form-select', multiple: true, size: "2"
 
-      .col-auto
-        = f.label :url_cont, t('sites.index.url'), class: 'form-label'
-      .col-auto
-        = f.search_field :url_cont, class: 'form-control'
+          .col-auto
+            = f.label :url_cont, t('sites.index.url')
+          .col-auto
+            = f.search_field :url_cont, class: 'form-control'
 
-      .col-auto
-        = f.submit class: 'btn btn-sm btn-dark'
+          .col-auto
+            = f.submit class: 'btn btn-sm btn-dark'

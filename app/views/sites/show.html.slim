@@ -1,33 +1,30 @@
-.row.mb-4
-  .col
-    .card.site-info
-      .card-header.d-flex.justify-content-between
-        h5.card-title = @site.name
-        .settings
-          = link_to t('links.edit'), edit_site_path(@site), class: 'btn btn-sm btn-primary me-3'
-          = link_to t('links.delete'), @site, method: :delete, data: { confirm: t('links.confirm') }, class: 'btn btn-sm btn-danger'
-      .card-body
-        = render 'site_body'
+section.site-info.mb-4
+  .row.mb-3
+    .col.text-center
+      h4.h4 = @site.name
 
-      .card-footer.d-flex.justify-content-between.ping-wrapper
-        = link_to t('links.ping'), ping_current_site_path(@site), remote: true, data: { type: :json }, class: 'btn btn-outline-dark ping-link'
-        .mw-3.ping-box
+  = render 'site_body'
 
-= render 'logs/search_form'
+  .row.justify-content-center.ping-wrapper
+    .col-7.d-flex.align-items-center
+      = link_to t('links.ping'), ping_current_site_path(@site), remote: true, data: { type: :json }, class: 'btn btn-outline-dark ping-link flex-shrink-0'
+      .ms-3.ping-box.text-truncate
+    .col-1.d-flex.justify-content-end
+      = link_to t('links.all_logs'), [@site, :logs], class: 'btn btn-outline-dark'
+
+= render 'chart_search_form'
+
+= render 'chart'
 
 .row
   .col
+    h5.h5.mt-3.text-center = t('.last_logs')
     table.table.table-hover
       thead
         tr
-          th scope="col"
-            = sort_link(@query, :created_at, t('.time'), default_order: :desc)
+          th scope="col" = t('.time')
           th scope="col" = t('.status')
-          th scope="col"
-            = sort_link(@query, :response_time, t('.response_time'))
-          th scope="col"
-            = sort_link(@query, :response_message, t('.response_message'))
+          th scope="col" = t('.response_time')
+          th scope="col" = t('.response_message')
       tbody
-        = render @logs
-
-    = paginate @logs
+        = render @last_logs

@@ -15,12 +15,17 @@ en:
     submit:
       create: Add site
       update: Save changes
+    no_data: No data
+    ms: ms
+    enable: Start monitoring
+    disable: Stop monitoring
 
   links:
-    edit: Edit
+    settings: Settings
     delete: Delete
     confirm: Are you shure?
     ping: Test ping
+    all_logs: History
 
   app:
     name: Pinger
@@ -30,6 +35,11 @@ en:
     in_seconds: In seconds
     in_minutes: In minutes
     all: All
+    filter: Filter
+    clear: Clear
+    last_hour: Last hour
+    last_day: Last day
+    chart: Chart
 
   label:
     add_site: Add new site
@@ -77,10 +87,12 @@ en:
       status: Status
       response_time: Response time
       response_message: Response message
+      last_logs: Last history
+      loading: Loading...
     site_body:
       status: Status
       url: URL
-      interval: Interval
-      timeout: Timeout
-      checking_string: Checking string
+      min_response: MIN.
+      max_response: MAX.
+      average_response: AVG.
       created_at: Added

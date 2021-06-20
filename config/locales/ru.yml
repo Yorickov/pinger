@@ -15,12 +15,17 @@ ru:
     submit:
       create: Добавить сайт
       update: Сохранить изменения
+    no_data: Нет данных
+    ms: мс
+    enable: Мониторить
+    disable: Не мониторить
 
   links:
-    edit: Редактировать
+    settings: Настройки
     delete: Удалить
     confirm: Вы уверены?
     ping: Тестовый пинг
+    last_logs: История
 
   app:
     name: Пингер
@@ -30,6 +35,11 @@ ru:
     in_seconds: В секундах
     in_minutes: В минутах
     all: Все
+    filter: Фильтр
+    clear: Очистить
+    last_hour: Последний час
+    last_day: Последний день
+    chart: График
 
   label:
     add_site: Добавить новый сайт
@@ -76,10 +86,12 @@ ru:
       status: Статус
       response_time: Время отклика
       response_message: Сообщение ответа
+      all_logs: История
+      loading: Загрузка...
     site_body:
       status: Статус
       url: URL
-      interval: Интервал
-      timeout: Тайм-аут
-      checking_string: Строка проверки
+      min_response: МИН.
+      max_response: МАКС.
+      average_response: СРЕДН.
       created_at: Добавлен

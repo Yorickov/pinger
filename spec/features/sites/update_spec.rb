@@ -15,9 +15,7 @@ feature 'User can update site added by him for monitoring' do
     background do
       sign_in(user1)
       visit "/sites/#{site.id}"
-      within '.card' do
-        click_on t('links.edit')
-      end
+      click_on t('links.settings')
     end
 
     scenario 'updates his site' do

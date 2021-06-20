@@ -1,0 +1,19 @@
+.row.mb-3
+  .col
+    ul.nav.align-items-center
+      li.nav-item
+        = link_to t('form.last_hour'), { q: { created_at_gteq: Time.current - 1.hour } }, class: 'nav-link text-light bg-dark rounded-3 me-2'
+      li.nav-item
+        = link_to t('form.last_day'), { q: { created_at_gteq: Time.current - 1.day }, filter: 'hour' }, class: 'nav-link text-light bg-dark rounded-3'
+
+      li.nav-item.ms-auto
+        = search_form_for @query, url: @site, class: 'nav-item row align-items-center gx-2 gy-2' do |f|
+          .col-auto
+            = select_tag(:filter, options_for_select(['minute', 'hour']), class: 'form-select')
+          .col-auto
+            = f.datetime_local_field :created_at_gteq, class: 'form-control'
+          .col-auto
+            = f.datetime_local_field :created_at_lteq, class: 'form-control'
+
+          .col-auto
+            = f.submit class: 'btn btn-sm btn-dark'

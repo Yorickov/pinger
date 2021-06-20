@@ -1,10 +1,10 @@
-.row
-  .col-12.mb-3
-    = link_to t('form.filter'), '#filter_form', data: { 'bs-toggle': 'collapse' }, role: 'button', class: 'btn btn-sm btn-secondary', aria: { expanded: 'false', controls: 'filter_form' }
-  .col.collapse#filter_form
-    = search_form_for @query, url: site_path(@site), class: 'row gx-2 gy-3 align-items-center' do |f|
+.row.align-items-center.gx-2
+  .col-auto
+    = link_to t('form.clear'), {}, class: 'btn btn-sm text-light bg-dark rounded-3'
+  .col
+    = search_form_for @query, url: [@site, :logs], class: 'row gx-2 gy-3 align-items-center' do |f|
       .col-auto
-        = f.label :status_eq, t('sites.show.status'), class: 'form-label'
+        = f.label :status_eq, t('sites.show.status')
       .col-sm-2
         = f.select :status_eq, %w[success failed timeout_error errored content_missing], { include_blank: t('form.all') }, class: 'form-select'
 

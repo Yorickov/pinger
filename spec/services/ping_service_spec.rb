@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe PingService do
   let(:url) { Faker::Internet.url }
-  let(:checking_string) { Faker::String.random }
+  let(:checking_string) { Faker::Lorem.word }
 
   before { stub_valid_request(url, 200) }
 

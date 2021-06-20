@@ -21,6 +21,10 @@ class SitePolicy < ApplicationPolicy
     show?
   end
 
+  def ping_change?
+    show?
+  end
+
   class Scope < Scope
     def resolve
       scope.all

@@ -2,7 +2,7 @@
 
 class SitesController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_site, only: %i[show edit update destroy ping_current]
+  before_action :load_site, only: %i[show edit update destroy ping_current ping_change]
 
   def index
     @query = current_user.sites.includes(:logs).ransack(params[:q])
@@ -16,8 +16,15 @@ class SitesController < ApplicationController
   def show
     authorize @site
 
-    @query = @site.logs.ransack(params[:q])
-    @logs = @query.result(distinct: true).order(created_at: :desc).page(params[:page])
+    logs = @site.logs
+    @last_logs = logs.order(created_at: :desc).first(5)
+
+    query_params = params[:q] || default_query_params
+    @query = logs.ransack(query_params)
+    chart_logs = @query.result(distinct: true)
+
+    options = params.key?(:filter) ? { filter: params[:filter] } : {}
+    @data, @response_values = ChartService.call(chart_logs, options)
   end
 
   def create
@@ -63,6 +70,14 @@ class SitesController < ApplicationController
     render_ping_info_in_json(params[:url], ping_params)
   end
 
+  def ping_change
+    authorize @site
+
+    @site.update!(enabled: !@site.enabled)
+
+    redirect_to @site
+  end
+
   private
 
   def site_params
@@ -85,5 +100,9 @@ class SitesController < ApplicationController
     options['timeout'] = options['timeout'].to_i if options.key?('timeout')
     ping_info = PingService.call(url, options.symbolize_keys)
     render json: ping_info
+  end
+
+  def default_query_params
+    { created_at_gteq: Time.current - 1.hour }
   end
 end

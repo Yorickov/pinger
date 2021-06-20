@@ -237,4 +237,61 @@ RSpec.describe 'Sites', type: :request do
       end
     end
   end
+
+  describe 'PATCH /ping_change' do
+    let!(:site) { user1.sites.first }
+
+    context 'as authenticated authorized User' do
+      before { sign_in(user1) }
+
+      it 'redirects to :show' do
+        patch "/sites/#{site.id}/ping_change"
+
+        expect(response).to redirect_to site
+      end
+
+      it 'change state to disabled' do
+        expect(site).to be_enabled
+
+        patch "/sites/#{site.id}/ping_change"
+        site.reload
+
+        expect(site).not_to be_enabled
+      end
+    end
+
+    context 'as authenticated not authorized User' do
+      before { sign_in(user2) }
+
+      it 'redirects to root' do
+        patch "/sites/#{site.id}/ping_change"
+
+        expect(response).to have_http_status(:redirect)
+      end
+
+      it 'does not delete site from database' do
+        expect(site).to be_enabled
+        patch "/sites/#{site.id}/ping_change"
+        site.reload
+
+        expect(site).to be_enabled
+      end
+    end
+
+    context 'as Guest' do
+      it 'redirects to login form' do
+        patch "/sites/#{site.id}/ping_change"
+
+        expect(response).to redirect_to new_user_session_path
+      end
+
+      it 'does not delete site from database' do
+        expect(site).to be_enabled
+        patch "/sites/#{site.id}/ping_change"
+        site.reload
+
+        expect(site).to be_enabled
+      end
+    end
+  end
 end

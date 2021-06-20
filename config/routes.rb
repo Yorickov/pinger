@@ -40,7 +40,10 @@ Rails.application.routes.draw do
   scope '(:locale)', locale: /en|ru/ do
     resources :sites do
       get :ping_current, on: :member
+      patch :ping_change, on: :member
       get :ping_new, on: :collection
+
+      resources :logs, only: %i[index]
     end
   end
 

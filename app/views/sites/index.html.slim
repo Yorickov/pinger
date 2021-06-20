@@ -2,17 +2,17 @@
 
 .row
   .col
-    table.table.table-hover
-      thead
+    table.table.table-hover.table-borderless
+      thead.table-dark
         tr
           th scope="col" = t('.status')
           th scope="col"
-            = sort_link(@query, :name, t('.name'))
+            = sort_link @query, :name, {}, class: 'text-dark'
           th scope="col" = t('.protocol')
           th scope="col" = t('.url')
           th scope="col" = t('.interval')
           th scope="col"
-            = sort_link(@query, :last_pinged_at, t('.last_pinged_at'))
+            = sort_link @query, :last_pinged_at, {}, class: 'text-dark'
           th scope="col" = t('.last_pinged_result')
-      tbody
+      tbody.bg-light
         = render @sites

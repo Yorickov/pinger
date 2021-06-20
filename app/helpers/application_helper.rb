@@ -8,10 +8,28 @@ module ApplicationHelper
   end
 
   def format_utc_time(time)
-    time.strftime('%d-%m-%Y %H:%M').in_time_zone
+    time.in_time_zone.strftime('%d-%m-%Y %H:%M')
   end
 
   def truncate(text, length = TRUNCATE_MODIFIER)
     text.truncate(length)
+  end
+
+  def format_data(value)
+    text, klass = if value.zero?
+                    [I18n.t('helpers.no_data'), 'text-muted']
+                  else
+                    ["#{value} #{I18n.t('helpers.ms')}", 'fw-bold fst-italic']
+                  end
+    content_tag(:span, text, class: klass)
+  end
+
+  def ping_ability(site)
+    site.enabled? ? I18n.t('helpers.disable') : I18n.t('helpers.enable')
+  end
+
+  def format_status(site)
+    klass = site.enabled? ? 'text-success' : 'text-danger'
+    content_tag(:span, site.status, class: klass)
   end
 end

@@ -9,9 +9,9 @@ RSpec.describe HttpClient do
   let(:options) { {} }
   let(:code_success) { 200 }
   let(:code_failed) { 500 }
-  let(:checking_string) { Faker::String.random }
-  let(:random_string) { Faker::String.random }
-  let(:response_body) { "#{checking_string} #{Faker::String.random}" }
+  let(:checking_string) { Faker::Lorem.word }
+  let(:random_string) { Faker::Lorem.word }
+  let(:response_body) { "#{checking_string} #{Faker::Lorem.word}" }
   let(:exception_message) { 'Exception from WebMock' }
 
   describe 'Service called' do

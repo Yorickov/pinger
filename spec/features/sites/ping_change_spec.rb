@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-feature 'User can delete his site' do
+feature 'User can manage site ping ability' do
   given(:user1) { create(:user) }
   given!(:site) { create(:site, user: user1) }
   given(:user2) { create(:user) }
@@ -13,19 +13,21 @@ feature 'User can delete his site' do
       visit "/sites/#{site.id}"
     end
 
-    scenario 'deletes his site' do
-      click_on t('links.delete')
+    scenario 'change site ping ability' do
+      click_on t('helpers.disable')
 
-      [site.name, site.full_url].each { |content| expect(page).not_to have_content(content) }
+      expect(page).to have_content t('helpers.enable')
+
+      click_on t('helpers.enable')
+
+      expect(page).to have_content t('helpers.disable')
     end
   end
 
   describe 'Authenticated not authorized user' do
-    background do
-      sign_in(user2)
-    end
+    background { sign_in(user2) }
 
-    scenario "fails to delete another user's site" do
+    scenario "fails to stop to ping another user's site" do
       within 'table' do
         expect(page).not_to have_content site.name
       end

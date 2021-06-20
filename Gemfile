@@ -7,10 +7,12 @@ ruby '3.0.1'
 
 gem 'aasm'
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'chartkick'
 gem 'devise', '~> 4.8.0'
 gem 'devise-i18n'
 gem 'faraday'
 gem 'flash_rails_messages'
+gem 'groupdate'
 gem 'jbuilder', '~> 2.7'
 gem 'kaminari', git: 'https://github.com/kaminari/kaminari'
 gem 'parallel'

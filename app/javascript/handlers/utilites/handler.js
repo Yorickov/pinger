@@ -15,13 +15,13 @@ export default (event) => {
     pingBoxNode.innerHTML = '';
   }
 
-  const pingInfoNode = document.createElement('div');
-  const baseClasses = ['mb-3', 'card-text'];
+  const pingInfoNode = document.createElement('span');
+  const baseClasses = ['card-text'];
   const optClass = status === 'success' ? 'text-success' : 'text-danger';
   pingInfoNode.classList.add(...baseClasses, optClass);
 
   const optContent = status === 'success' ? `. Response time: ${response_time}` : '';
-  const content = `${_.capitalize(status)}: ${_.truncate(response_message, { length: 30 })}${optContent}`;
+  const content = `${_.capitalize(status)}: ${response_message}${optContent}`;
   pingInfoNode.textContent = content;
 
   pingBoxNode.append(pingInfoNode);

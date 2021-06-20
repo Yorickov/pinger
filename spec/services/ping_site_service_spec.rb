@@ -7,7 +7,7 @@ RSpec.describe PingSiteService do
 
   let(:site) { create(:site) }
   let(:response) { { status: 'success', response_message: 'OK', response_time: 100 } }
-  let(:checking_string) { Faker::String.random }
+  let(:checking_string) { Faker::Lorem.word }
 
   describe 'Called service calls http-request client to ping site' do
     before { stub_valid_request(site.full_url, 200) }

@@ -1,19 +1,29 @@
-/ TODO: should refactor later
-table.table.table-borderless
-  thead
-    tr
-      th scope="col" = t('.status')
-      th scope="col" = t('.url')
-      th scope="col" = t('.interval')
-      th scope="col" = t('.timeout')
-      th scope="col" = t('.checking_string')
-      th scope="col" = t('.created_at')
-  tbody
-    tr
-      td = @site.status
-      td = @site.full_url
-      td = @site.interval
-      td = @site.timeout
-      td = @site.checking_string
-      td = format_unix_time(@site.created_at)
-
+.row.mb-3
+  .col-2
+    .d-flex.justify-content-center.align-items-center.bg-light.rounded-3.h-100.border
+      h4.h4.display = format_status(@site)
+  .col
+    .border.p-3
+      table.table.table-borderless
+        thead
+          tr
+            th scope="col" = t('.url')
+            th scope="col" = t('.min_response')
+            th scope="col" = t('.max_response')
+            th scope="col" = t('.average_response')
+            th scope="col" = t('.created_at')
+        tbody
+          tr
+            td = @site.full_url
+            td
+              = format_data(@response_values[:min])
+            td
+              = format_data(@response_values[:max])
+            td
+              = format_data(@response_values[:avg])
+            td = format_unix_time(@site.created_at)
+  .col-2
+    nav.nav.flex-column.justify-content-around.h-100.px-3.settings
+      = link_to ping_ability(@site), ping_change_site_path(@site), method: :patch, class: 'nav-item btn btn-secondary', data: { confirm: t('links.confirm') }
+      = link_to t('links.settings'), edit_site_path(@site), class: 'nav-item btn btn-primary'
+      = link_to t('links.delete'), @site, method: :delete, data: { confirm: t('links.confirm') }, class: 'nav-item btn btn-danger'
