@@ -40,5 +40,9 @@ FactoryBot.define do
     trait :invalid do
       name { nil }
     end
+
+    trait :up do
+      status { 'up' }
+    end
   end
 end

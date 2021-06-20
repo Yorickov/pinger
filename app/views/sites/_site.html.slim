@@ -15,4 +15,4 @@ tr.position-relative
       = format_unix_time(site.last_pinged_at)
   td
     - if site.last_pinged_at
-      = site.logs.last.status
+      = site.logs.first.status

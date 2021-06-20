@@ -47,8 +47,7 @@ class PingSiteService
     Time.now.utc.to_i
   end
 
-  # TODO: very preliminary version
   def change_status(response)
-    response[:status] == 'success' ? 'active' : 'inactive'
+    SiteStatusService.call(response)
   end
 end

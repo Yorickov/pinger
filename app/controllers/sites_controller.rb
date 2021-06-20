@@ -17,7 +17,7 @@ class SitesController < ApplicationController
     authorize @site
 
     logs = @site.logs
-    @last_logs = logs.order(created_at: :desc).first(5)
+    @last_logs = logs.first(5)
 
     query_params = params[:q] || default_query_params
     @query = logs.ransack(query_params)

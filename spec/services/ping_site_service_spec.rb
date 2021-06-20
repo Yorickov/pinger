@@ -6,7 +6,8 @@ RSpec.describe PingSiteService do
   subject(:service_called) { described_class.call(site) }
 
   let(:site) { create(:site) }
-  let(:response) { { status: 'success', response_message: 'OK', response_time: 100 } }
+  let(:response) { { status: Log::STATE_SUCCESS, response_message: 'OK', response_time: 100 } }
+  let(:saved_response) { { **response, status: response[:status].to_s } }
   let(:checking_string) { Faker::Lorem.word }
 
   describe 'Called service calls http-request client to ping site' do
@@ -44,59 +45,89 @@ RSpec.describe PingSiteService do
       expect { service_called }.to change(Log, :count).by(1)
     end
 
-    context 'when site pinged with code 100-300' do
-      it 'creates log with success status and sets site status active' do
+    context 'when site pinged with code 100-300 with fast response' do
+      it 'creates log with success status' do
         service_called
 
-        expect(site.logs.last).to have_attributes(**response)
+        expect(site.logs.last).to have_attributes(**saved_response)
       end
 
-      it 'sets status active' do
-        expect { service_called }.to change(site, :status).to('active')
+      it 'sets site status to :up' do
+        expect { service_called }.to change(site, :status).to(Site::STATE_UP.to_s)
+      end
+    end
+
+    context 'when site pinged with code 100-300 with slow response' do
+      before { response[:response_time] = 600 }
+
+      it 'creates log with :success status' do
+        service_called
+
+        expect(site.logs.last).to have_attributes(**saved_response)
+      end
+
+      it 'sets site status to :long_response' do
+        expect { service_called }.to change(site, :status).to(Site::STATE_LONG_RESPONSE.to_s)
       end
     end
 
     context 'when site pinged with code 400-500' do
-      let(:response) { { status: 'failed', response_message: 'Internal Server Error' } }
+      let(:response) { { status: Log::STATE_FAILED, response_message: 'Internal Server Error' } }
 
-      it 'creates log with failed status' do
+      it 'creates log with :failed status' do
         service_called
 
-        expect(site.logs.last).to have_attributes(**response)
+        expect(site.logs.last).to have_attributes(**saved_response)
       end
 
-      it 'remain status inactive' do
-        expect { service_called }.not_to change(site, :status)
+      it 'set site status to :down' do
+        expect { service_called }.to change(site, :status).to(Site::STATE_DOWN.to_s)
       end
     end
 
     context 'when checking content missing' do
       let(:response) do
-        { status: 'content_missing', response_message: 'Checking content: <string> missing' }
+        { status: Log::STATE_CONTENT_MISSING, response_message: 'Checking content: <string> missing' }
       end
 
-      it 'creates log with failed status' do
+      it 'creates log with :content_missing status' do
         service_called
 
-        expect(site.logs.last).to have_attributes(**response)
+        expect(site.logs.last).to have_attributes(**saved_response)
       end
 
-      it 'remain status inactive' do
-        expect { service_called }.not_to change(site, :status)
+      it 'set site status to :down' do
+        expect { service_called }.to change(site, :status).to(Site::STATE_DOWN.to_s)
       end
     end
 
     context 'when site pinged with error' do
-      let(:response) { { status: 'errored' } }
+      let(:site) { create(:site, :up) }
+      let(:response) { { status: Log::STATE_ERRORED } }
 
-      it 'creates log with errored status' do
+      it 'creates log with :errored status' do
         service_called
 
-        expect(site.logs.last).to have_attributes(**response)
+        expect(site.logs.last).to have_attributes(**saved_response)
       end
 
-      it 'remain status inactive' do
-        expect { service_called }.not_to change(site, :status)
+      it 'set site status to :inactive' do
+        expect { service_called }.to change(site, :status).to(Site::STATE_INACTIVE.to_s)
+      end
+    end
+
+    context 'when site pinged with timeout error' do
+      let(:site) { create(:site, :up) }
+      let(:response) { { status: Log::STATE_TIMEOUT_ERROR } }
+
+      it 'creates log with :errored status' do
+        service_called
+
+        expect(site.logs.last).to have_attributes(**saved_response)
+      end
+
+      it 'set site status to :inactive' do
+        expect { service_called }.to change(site, :status).to(Site::STATE_INACTIVE.to_s)
       end
     end
   end

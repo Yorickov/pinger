@@ -46,16 +46,9 @@ class Site < ApplicationRecord
 
   aasm column: 'status' do
     state :inactive, initial: true
-    state :active
-
-    # TODO: still in working
-    # event :activate do
-    #   transitions from: %i[inactive active], to: :active
-    # end
-
-    # event :inactivate do
-    #   transitions from: %i[active inactive], to: :inactive
-    # end
+    state :down
+    state :long_response
+    state :up
   end
 
   def full_url

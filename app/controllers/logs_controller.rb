@@ -6,7 +6,7 @@ class LogsController < ApplicationController
 
   def index
     @query = @site.logs.ransack(params[:q])
-    @logs = @query.result(distinct: true).order(created_at: :desc).page(params[:page])
+    @logs = @query.result(distinct: true).page(params[:page])
   end
 
   private

@@ -19,7 +19,7 @@ RSpec.describe HttpClient do
       before { stub_valid_request(url, code_success) }
 
       it 'returns success status' do
-        expect(service_called).to include(status: described_class::STATUSES[:success])
+        expect(service_called).to include(status: Log::STATE_SUCCESS)
       end
     end
 
@@ -27,7 +27,7 @@ RSpec.describe HttpClient do
       before { stub_valid_request(url, code_failed) }
 
       it 'returns failed status' do
-        expect(service_called).to include(status: 'failed')
+        expect(service_called).to include(status: Log::STATE_FAILED)
       end
     end
 
@@ -37,7 +37,7 @@ RSpec.describe HttpClient do
       before { stub_valid_request(url, code_success, response_body) }
 
       it 'returns success status' do
-        expect(service_called).to include(status: described_class::STATUSES[:success])
+        expect(service_called).to include(status: Log::STATE_SUCCESS)
       end
     end
 
@@ -47,7 +47,7 @@ RSpec.describe HttpClient do
       before { stub_valid_request(url, code_success, response_body) }
 
       it 'returns success status' do
-        expect(service_called).to include(status: described_class::STATUSES[:content_missing])
+        expect(service_called).to include(status: Log::STATE_CONTENT_MISSING)
       end
     end
 
@@ -59,7 +59,7 @@ RSpec.describe HttpClient do
 
         it 'returns timeout error status' do
           expect(service_called)
-            .to include(status: described_class::STATUSES[:timeout_error], response_message: exception_message)
+            .to include(status: Log::STATE_TIMEOUT_ERROR, response_message: exception_message)
         end
       end
 
@@ -68,7 +68,7 @@ RSpec.describe HttpClient do
 
         it 'returns errored status' do
           expect(service_called)
-            .to include(status: described_class::STATUSES[:errored], response_message: exception_message)
+            .to include(status: Log::STATE_ERRORED, response_message: exception_message)
         end
       end
     end

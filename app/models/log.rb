@@ -23,6 +23,8 @@
 class Log < ApplicationRecord
   include AASM
 
+  default_scope { order(created_at: :desc) }
+
   belongs_to :site
 
   validates :status, presence: true
