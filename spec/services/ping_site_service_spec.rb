@@ -66,8 +66,8 @@ RSpec.describe PingSiteService do
         expect(site.logs.last).to have_attributes(**saved_response)
       end
 
-      it 'sets site status to :long_response' do
-        expect { service_called }.to change(site, :status).to(Site::STATE_LONG_RESPONSE.to_s)
+      it 'sets site status to :slow' do
+        expect { service_called }.to change(site, :status).to(Site::STATE_SLOW.to_s)
       end
     end
 

@@ -47,7 +47,7 @@ class Site < ApplicationRecord
   aasm column: 'status' do
     state :inactive, initial: true
     state :down
-    state :long_response
+    state :slow
     state :up
   end
 

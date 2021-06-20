@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  TRUNCATE_MODIFIER = 30
+  TRUNCATE_MODIFIER = 100
+  STATUS_MAPPING = { 'up' => 'success', 'slow' => 'warning', 'down' => 'danger', 'inactive' => 'muted' }.freeze
 
   def format_unix_time(time)
     Time.zone.at(time).strftime('%d-%m-%Y %H:%M')
@@ -29,7 +30,12 @@ module ApplicationHelper
   end
 
   def format_status(site)
-    klass = site.enabled? ? 'text-success' : 'text-danger'
-    tag.span(site.status, class: klass)
+    text = status_name(site).capitalize
+    color = "text-#{STATUS_MAPPING[site.status]}"
+    tag.h1(text, class: color)
+  end
+
+  def status_name(site)
+    site.enabled? ? site.status : 'disabled'
   end
 end

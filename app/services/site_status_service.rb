@@ -35,6 +35,6 @@ class SiteStatusService
   attr_reader :response
 
   def precise_up_status
-    response[:response_time] > RESPONSE_TIME_LIMIT ? Site::STATE_LONG_RESPONSE : Site::STATE_UP
+    response[:response_time] > RESPONSE_TIME_LIMIT ? Site::STATE_SLOW : Site::STATE_UP
   end
 end

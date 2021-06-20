@@ -17,8 +17,8 @@ en:
       update: Save changes
     no_data: No data
     ms: ms
-    enable: Start monitoring
-    disable: Stop monitoring
+    enable: Enable
+    disable: Dislabe
 
   links:
     settings: Settings
