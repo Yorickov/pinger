@@ -32,7 +32,7 @@ FactoryBot.define do
     url { 'github.com' }
     protocol { 'http://' }
     interval { 1 }
-    checking_string { nil }
+    checking_string { '' }
     timeout { 10 }
 
     user

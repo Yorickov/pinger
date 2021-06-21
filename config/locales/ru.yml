@@ -95,3 +95,7 @@ ru:
       max_response: МАКС.
       average_response: СРЕДН.
       created_at: Добавлен
+
+  notifications_mailer:
+    status_changed:
+      subject: Статус изменился

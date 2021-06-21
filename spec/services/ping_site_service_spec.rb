@@ -17,7 +17,7 @@ RSpec.describe PingSiteService do
       it 'calls Http Client' do
         expect(HttpClient)
           .to receive(:call)
-          .with(site.full_url, { timeout: site.timeout, checking_string: nil })
+          .with(site.full_url, { timeout: site.timeout, checking_string: '' })
           .and_call_original
 
         service_called

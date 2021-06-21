@@ -44,6 +44,8 @@ class Site < ApplicationRecord
   validates :url, presence: true
   validate :validate_url_format
 
+  around_update :notify_about_changing_status
+
   aasm column: 'status' do
     state :inactive, initial: true
     state :down
@@ -69,5 +71,12 @@ class Site < ApplicationRecord
     return if url.blank? || full_url =~ URI::DEFAULT_PARSER.make_regexp
 
     errors.add :url, I18n.t('activerecord.errors.messages.url_format')
+  end
+
+  def notify_about_changing_status
+    logger.info "Changes in status: #{changes}"
+    statuses = changes.fetch('status', [])
+    yield
+    NotificationsMailer.status_changed(self, statuses).deliver_later unless statuses.empty?
   end
 end

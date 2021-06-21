@@ -41,6 +41,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'letter_opener', group: :development
   gem 'listen', '~> 3.3'
   gem 'ordinare'
   gem 'rack-mini-profiler', '~> 2.0'

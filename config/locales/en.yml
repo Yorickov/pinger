@@ -96,3 +96,7 @@ en:
       max_response: MAX.
       average_response: AVG.
       created_at: Added
+
+  notifications_mailer:
+    status_changed:
+      subject: Status changed
