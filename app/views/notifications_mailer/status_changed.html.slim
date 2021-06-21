@@ -1,3 +1,4 @@
 h1 Site status changed
 
-p = "Hello, status of site <#{@site.name}> has changed from <#{@old_status}> to <#{@new_status}>"
+p = "Hello, site <#{@site.name}> has changed status to <#{@site.status}>"
+p = "The reason: #{@log.response_message}"

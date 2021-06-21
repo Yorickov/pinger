@@ -75,8 +75,8 @@ class Site < ApplicationRecord
 
   def notify_about_changing_status
     logger.info "Changes in status: #{changes}"
-    statuses = changes.fetch('status', [])
+    is_status_changed = changes.key?('status')
     yield
-    NotificationsMailer.status_changed(self, statuses).deliver_later unless statuses.empty?
+    NotificationsMailer.status_changed(self).deliver_later if is_status_changed
   end
 end

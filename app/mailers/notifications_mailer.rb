@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class NotificationsMailer < ApplicationMailer
-  def status_changed(site, statuses)
+  def status_changed(site)
     @site = site
-    @old_status, @new_status = statuses
+    @log = site.logs.first
 
     mail to: @site.user.email
   end

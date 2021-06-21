@@ -22,4 +22,10 @@ module MockHelpers
       .with(url, options)
       .and_return(response)
   end
+
+  def mock_notification(site)
+    message_delivery = instance_double(ActionMailer::MessageDelivery)
+    expect(NotificationsMailer).to receive(:status_changed).with(site).and_return(message_delivery)
+    allow(message_delivery).to receive(:deliver_later)
+  end
 end
