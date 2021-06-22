@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SitesController < ApplicationController
+  LAST_LOGS_LIMIT = 5
+
   before_action :authenticate_user!
   before_action :load_site, only: %i[show edit update destroy ping_current ping_change]
 
@@ -17,7 +19,7 @@ class SitesController < ApplicationController
     authorize @site
 
     logs = @site.logs
-    @last_logs = logs.first(5)
+    @last_logs = logs.first(LAST_LOGS_LIMIT)
 
     query_params = params[:q] || default_query_params
     @query = logs.ransack(query_params)

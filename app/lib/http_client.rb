@@ -58,8 +58,6 @@ class HttpClient
   end
 
   def build_response(status, response_message, response_time = nil)
-    response = { status: status, response_message: response_message }
-    response[:response_time] = response_time if response_time
-    response
+    { status: status, response_message: response_message, response_time: response_time }.compact
   end
 end
