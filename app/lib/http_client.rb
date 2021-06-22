@@ -35,11 +35,12 @@ class HttpClient
       res = connection.get
       end_time = Time.now.utc
 
-      if content_check?(res.body)
-        status = res.status >= 400 ? Log::STATE_FAILED : Log::STATE_SUCCESS
-        build_response(status, res.reason_phrase, calc_response_time(start_time, end_time))
+      return build_response(Log::STATE_CONTENT_MISSING, "<#{options[:checking_string]}> lacks") if no_content?(res.body)
+
+      if res.status >= 400
+        build_response(Log::STATE_FAILED, res.reason_phrase)
       else
-        build_response(Log::STATE_CONTENT_MISSING, "<#{options[:checking_string]}> doesn't present")
+        build_response(Log::STATE_SUCCESS, res.reason_phrase, calc_response_time(start_time, end_time))
       end
     rescue Faraday::TimeoutError => e
       build_response(Log::STATE_TIMEOUT_ERROR, e.message)
@@ -52,8 +53,8 @@ class HttpClient
     (end_time - start_time).in_milliseconds.to_i
   end
 
-  def content_check?(content)
-    options[:checking_string].blank? || content.include?(options[:checking_string])
+  def no_content?(content)
+    !options[:checking_string].blank? && !content.include?(options[:checking_string])
   end
 
   def build_response(status, response_message, response_time = nil)

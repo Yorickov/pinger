@@ -26,7 +26,7 @@ RSpec.describe PingSiteService do
       end
     end
 
-    context 'with check string' do
+    context 'with checking string' do
       it 'calls Http Client' do
         site.checking_string = checking_string
 

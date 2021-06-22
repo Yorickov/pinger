@@ -45,12 +45,13 @@ class ChartService
   end
 
   def calc_response_values(data)
-    size = data.size
+    filtered = data.reject { |_time, res| res.zero? }
+    size = filtered.size
     return { max: 0, min: 0, avg: 0 } if size.zero?
 
-    max = data.max_by { |_time, res| res }.last
-    min = data.min_by { |_time, res| res }.last
-    avg = data.sum { |_time, res| res } / size
+    max = filtered.max_by { |_time, res| res }.last
+    min = filtered.min_by { |_time, res| res }.last
+    avg = filtered.sum { |_time, res| res } / size
 
     { max: max, min: min, avg: avg }
   end
