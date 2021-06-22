@@ -54,7 +54,7 @@ class HttpClient
   end
 
   def no_content?(content)
-    !options[:checking_string].blank? && !content.include?(options[:checking_string])
+    options[:checking_string].present? && !content.include?(options[:checking_string])
   end
 
   def build_response(status, response_message, response_time = nil)
