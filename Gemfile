@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.0.1'
 
 gem 'aasm'
+gem 'administrate'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'chartkick'
 gem 'devise', '~> 4.8.0'

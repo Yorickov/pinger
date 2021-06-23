@@ -51,6 +51,7 @@ en:
     site_updated: Site updated
     site_deleted: Site deleted
     required_log_in: Must be logged in
+    admin_required: You have no admin rights
 
   pundit:
     default: You are not authorized to perform this action

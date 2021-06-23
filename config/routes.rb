@@ -31,6 +31,14 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :users
+    resources :sites, except: %i[new create]
+    resources :logs, only: %i[index show destroy]
+
+    root to: 'users#index'
+  end
+
   authenticate :user do
     mount Sidekiq::Web => '/sidekiq'
   end

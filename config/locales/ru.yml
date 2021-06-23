@@ -50,6 +50,7 @@ ru:
     site_created: Сайт создан
     site_updated: Сайт изменен
     site_deleted: Сайт удален
+    admin_required: У Вас нет прав админа
 
   navigation:
     sign_up: Зарегистрироваться

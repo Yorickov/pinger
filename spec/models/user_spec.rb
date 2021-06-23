@@ -5,6 +5,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  admin                  :boolean          default(FALSE)
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  remember_created_at    :datetime
@@ -60,5 +61,15 @@ RSpec.describe User, type: :model do
 
   describe 'Associations' do
     it { should have_many(:sites).dependent(:destroy) }
+  end
+
+  describe 'Admin' do
+    let(:user) { build(:user) }
+    let(:admin) { build(:user, :admin) }
+
+    specify do
+      expect(user).not_to be_admin
+      expect(admin).to be_admin
+    end
   end
 end
