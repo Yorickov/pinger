@@ -7,11 +7,5 @@ module Admin
     def authenticate_admin
       redirect_to root_path, alert: t('message.admin_required') unless current_user.try(:admin?)
     end
-
-    # Override this value to specify the number of elements to display at a time
-    # on index pages. Defaults to 20.
-    # def records_per_page
-    #   params[:per_page] || 20
-    # end
   end
 end

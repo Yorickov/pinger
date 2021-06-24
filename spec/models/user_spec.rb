@@ -5,12 +5,12 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
-#  admin                  :boolean          default(FALSE)
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  role                   :enum             default("user")
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -63,13 +63,21 @@ RSpec.describe User, type: :model do
     it { should have_many(:sites).dependent(:destroy) }
   end
 
-  describe 'Admin' do
+  describe 'Roles' do
     let(:user) { build(:user) }
     let(:admin) { build(:user, :admin) }
 
-    specify do
+    it 'role :user is set by default' do
       expect(user).not_to be_admin
       expect(admin).to be_admin
+    end
+
+    it 'role may be changed' do
+      user.admin!
+      admin.user!
+
+      expect(user).to be_admin
+      expect(admin).not_to be_admin
     end
   end
 end
