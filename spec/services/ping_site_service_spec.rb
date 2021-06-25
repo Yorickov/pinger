@@ -10,7 +10,8 @@ RSpec.describe PingSiteService do
   let(:saved_response) { { **response, status: response[:status].to_s } }
   let(:checking_string) { Faker::Lorem.word }
 
-  before { mock_notification(site) }
+  # TODO: uncomment after mailer-config fro prod
+  # before { mock_notification(site) }
 
   describe 'Called service calls http-request client to ping site' do
     before { stub_valid_request(site.full_url, 200) }

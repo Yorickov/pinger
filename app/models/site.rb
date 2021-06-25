@@ -44,7 +44,8 @@ class Site < ApplicationRecord
   validates :url, presence: true
   validate :validate_url_format
 
-  around_update :notify_about_changing_status
+  # TODO: uncomment after config smtp-services for production
+  # around_update :notify_about_changing_status
 
   aasm column: 'status' do
     state :inactive, initial: true
